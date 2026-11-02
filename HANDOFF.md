@@ -3,17 +3,20 @@
 Read `CLAUDE.md` first, then this. Delete this file once the redesign below is settled and its decisions are in `CLAUDE.md`.
 
 ## State right now
-We are mid-design on the plate edges, west/east ends and disc access. **Nothing is approved to build yet**: Mike must approve the full description first. Everything from this session is uncommitted in the working tree on `main`.
+Still mid-design on the plate edges, west/east ends and disc access. **Nothing is approved to build yet**: Mike must approve a written description first. Branch `handoff-end-panels` was merged into `main` and deleted.
 
-## The question waiting for Mike
-Which shape is closest to what he pictured for the west and east mesh panels, and what would he change?
+## Decided 2026-11-02 (recorded in `CLAUDE.md`)
+1. **Ends: option D.** Mike likes the BoxPlates look: no separate mesh panels; vent slots in the plates' own end walls, wrapping the corners from the fan grille. Merge his ideas with our design for **FDM / DIY**, not injection moulding: our own pattern (not his line pattern), printable without supports in the face-down tile orientation, ASA wall thickness.
+2. **Clips: slide-in, replaceable strips** in channels on the plate, no glue. Replaces glued shelves + 0.8 mm pockets.
+3. **Seam: diagonal + stepped**, near z≈158, must clear the clip strips.
+4. Heat test: optional, "nice to test afterwards".
+5. Duplicate `Ps5 *.stl` downloads deleted (all six matched tracked files byte-for-byte past the header).
 
-See `docs/mockups/end_panel_options.png`, true scale; the three top drawings are the options, the two bottom ones are the face and back.
-- **A, wedge fillers:** plates stay 384 mm. Mesh only fills the big wedge at each end. The core's end stays visible.
-- **B, one full slant:** one mesh face per end, north edge to south edge. North plate 434 mm, south plate 390 mm.
-- **C, two slants, pinched waist:** two mesh faces per end meeting near the core. Both plates 424 mm.
-
-Mike clicked C, C, B, A in the browser, then asked to save without replying. **Treat that as browsing, not a choice, and ask again.** A, B and C are Claude's readings of "slanted"; none may match what he pictured.
+## Next questions for Mike (one at a time, brainstorming skill)
+1. End wall height/profile: level edge vs following the slanted skirt, and whether the slots run the full end or only near the fan (west).
+2. Slot style for FDM: e.g. hex holes continuing the grille vs our own slot pattern.
+3. Disc access "swoop" (item 4 below) still unresolved.
+4. Clip-strip retention: friction fit, snap detent, or a screw/stop at the channel end.
 
 ## What Mike asked for (his words, in order)
 1. On the end walls added this session: "not what I had in mind". The sides should be "more consistant with the 'hide' language".
@@ -42,11 +45,10 @@ The semi-open walls are still in `cad/slab.py` (`END_FLAT`, `END_DISC`, `end_wal
 ## How to resume
 1. The process in use is the `superpowers:brainstorming` skill. Mike accepted its browser mockups. The questions continue one at a time, and a written description needs his approval before any build.
 2. The old mockup server dies with the session. To reopen it, run the skill's `scripts/start-server.sh --project-dir <scratchpad> --open`, then copy `docs/mockups/end_panels_screen.html` into the new `screen_dir`. To change the drawings, edit and run `python3 -I docs/mockups/end_panels_mockup.py <out.html>`.
-3. Use cadgen as `cadgen +0.8.4`, the installed version. `CLAUDE.md` still says 0.8.2.
+3. Use cadgen as `cadgen +0.8.4`, the installed version.
 
-## Side items, unchanged
+## Side items
 - Job 1B is still unmeasured and could change plate spacing by up to 8 mm.
-- `sources/ps5-cover-standard-edition/` has six untracked STLs Mike downloaded (`Ps5 *.stl`), about 84 MB: five duplicate tracked files and one is the omitted 82 MB panel. Don't run `git add -A` until they're dealt with. Claude recommended deleting them; Mike hasn't answered.
 - That model's creator and licence are still unconfirmed, because Cloudflare blocked curl and Mike saved the files rather than the page.
 
 ## Video reference: devynPC "BoxPlates" (reviewed 2026-11-02)

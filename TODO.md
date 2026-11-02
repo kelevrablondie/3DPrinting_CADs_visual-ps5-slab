@@ -68,7 +68,7 @@ Job 1 was Claude's mistake, not yours. The PS5 tips a little when it lies down, 
 
 ## Job 1C: How far does the plate slide?
 
-This tells Claude how much room a closed end needs.
+This tells Claude how much room the ends need. The end design is changing, so this may or may not end up mattering, but it only takes a minute.
 
 **You need:** tape measure, a small piece of sticky tape, and a pen.
 
@@ -173,7 +173,7 @@ Claude finishes the computer work after that. You're done until you have a print
 Don't do these yet.
 
 - [ ] Print the two small test pieces, and check that they click onto the PS5 and lock.
-- [ ] Print the shelves, then test them on the PS5 **without any glue**.
-- [ ] Print the plates.
-- [ ] Glue **on a table, far away from the PS5**.
-- [ ] Play a big game and check that the PS5 doesn't get too hot.
+- [ ] Print one plate and its clip strips. Slide the strips in and check they click onto the PS5. No glue needed for the clips.
+- [ ] Print the rest of the plates.
+- [ ] Join the two plate halves **on a table, far away from the PS5**. This is the only glue step.
+- [ ] Nice to test afterwards: play a big game and check that the PS5 doesn't get too hot. Devyn's test showed almost no difference, so this is optional.

@@ -2,6 +2,8 @@
 
 Owner: Mike. Personal, non-commercial project. Read this file fully before touching anything.
 
+**Work in progress: read `HANDOFF.md` next. A redesign is mid-discussion and a question is waiting for Mike.**
+
 ## Goal
 Replace Sony's curved side plates with **flat, level, minimalist plates** (Xbox One S–like slab),
 console used **horizontally only**. The black core stays visible as the centre band (front/rear I/O,
@@ -11,23 +13,24 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Topic | Decision |
 |---|---|
 | Orientation | Horizontal only, **disc-side plate down**, level on its feet. Chosen for the APU's liquid metal: either flat side keeps gravity square to the die, and disc-down should leave the die facing up (inferred from iFixit's teardown order, not confirmed) |
-| Plate depth / seam | **255 mm deep, one straight seam at z≈158** (tiles 160 + 224 mm). Flat `right` shelf split into `right` + `right_low` so the seam clears every shelf |
+| Plate depth / seam | **255 mm deep, 2 tiles split near z≈158** (tiles ~160 + 224 mm). Seam is now **diagonal + stepped** (BoxPlates-style, self-aligning, stiffer), not a straight cut; it must still clear every clip strip. Shape not designed yet |
 | Edges (revisited) | Slanted reveal kept (cardboard mock-up skipped) |
 | Grille (revisited) | Ø110 with 3.4 mm holes |
 | Shape | Flat plates, minimal overhang, hide the stock curvature |
 | Front / rear | Open – plates never cover I/O, disc slot or rear exhaust |
+| Short ends | **Direction: option D** (2026-11-02) — no separate mesh panels; the plates' own end walls carry vent slots that wrap the corners from the fan grille (BoxPlates idea, adapted for FDM). Our own pattern, not Devyn's line pattern. Wall shape/slot details still to brainstorm, see `HANDOFF.md`. Semi-open walls in `slab.py` are rejected |
 | Edges | Straight edges. Gaps as invisible as possible → skirt edges are straight but follow the core twist (4 mm reveal) |
 | Drive | **Notch** in disc-side skirt so the drive face is framed, no gap |
 | Fan | 120 mm double-sided intake (Sony teardown + iFixit photo confirm openings both sides) → grille on **both** plates |
 | Accent | Four-colour decorative inserts (red/yellow/green/blue), no lighting. No Sony logo/trademark |
 | Colour | Plates PS1-style grey (#c6c4be); core is the console's own black |
-| Mounting | Separate **clip shelves** glued into the plates (devynPC-style), registered by **0.8 mm alignment pockets** in the floor |
-| Glue procedure | Weld tiles → dry-fit shelves on console, lower plate, confirm every shelf drops into its pocket → remove → glue on bench (no glue near the console) |
+| Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Channel/retention design not done; shelves v2 hook geometry is the starting point |
+| Assembly | Weld tiles on the bench (only solvent step, never near the console) → slide clip strips in → fit to console |
 | Feet | TPU, ~12 mm, on the bottom plate (bottom fan grille must breathe) |
 
 ## Printing constraints
 - Printer: Mike plans to buy a Bambu **X2D Combo** (256 × 256 × 260 mm, heated chamber up to 65 °C; 235.5 mm wide when using both nozzles). Print the 255 mm tile side along Y: about 0.5 mm spare per side, so no brim on those edges.
-- Plate outline 384 × 255 mm → **2 tiles**; the seam joint is not designed yet. A 2×2 split can't avoid shelves: the flat `bottom` shelf spans almost the full depth.
+- Plate outline 384 × 255 mm (grows with end walls) → **2 tiles**; the stepped seam is not designed yet. A 2×2 split can't avoid shelves: the flat `bottom` shelf spans almost the full depth.
 - Materials: plates + shelves **ASA/ABS** (solvent-weldable, heat), feet TPU. No PLA.
 - Shelves print **upright as installed** (layers along the hook shafts); brim on the tall ones.
 - Print tiles face-down on textured PEI for a uniform outer finish.
@@ -67,7 +70,8 @@ Horizontal model = standing model rotated `Rot(0, −90, 0)` (disc side down).
 ## Key geometry (current values in `cad/slab.py`)
 - Plate outline L 384 × D 255, corner R 10, floor 2.5, skirt wall 2.5. Total width 119 mm (+12 mm feet), pending Job 1B.
 - Skirt edges: straight lines from (face width/2 + 4 mm) at z=0 to the same at z=380, front and rear separately;
-  no skirt across the short ends (core fills them). Disc-side front skirt removed over z 0…143 (drive notch).
+  Disc-side front skirt removed over z 0…143 (drive notch).
+- End walls (rejected concept, remove with the redesign): straight edges `END_FLAT`, `END_DISC` from `analysis/end_edges.py`; `cad/check_end_walls.py` checks core clearance over a 25 mm slide.
 - Grille: hex 3.4 mm holes, 5 mm pitch, R 55 around (y 3, z 305), holes skipped within 2.5 mm of shelf pockets.
 - Clip shelves v2 (`deliverables/ps5_clip_shelves_v2.zip`, also `analysis/shelf_*.stl`): 5 flat + 4 disc, 18 hooks
   (flat 11, disc 7), glue faces +0.8 mm for the pockets. Clip table: `analysis/clip_map.png`; groups: `tools/shelf_groups.json`.
@@ -93,10 +97,10 @@ tools/              requirements.txt, shelf_groups.json, run_shelves.sh, make_po
 ```
 
 ## Environment
-- CAD: **text-to-cad** plugin + `cadgen` 0.8.2 (build123d / OCCT).
+- CAD: **text-to-cad** plugin + `cadgen` 0.8.4 (build123d / OCCT).
   `claude plugin marketplace add earthtojake/text-to-cad#latest && claude plugin install text-to-cad@earthtojake`
-  Needs `uv`. One-time: `uvx --no-config --managed-python --python 3.13 --from cadgen==0.8.2 cadgen doctor`.
-  Run models with `cadgen +0.8.2 run cad/slab.py`; snapshots `cadgen +0.8.2 snapshot <id> out.png --display shaded`.
+  Needs `uv`. One-time: `uvx --no-config --managed-python --python 3.13 --from cadgen==0.8.4 cadgen doctor`.
+  Run models with `cadgen +0.8.4 run cad/slab.py`; snapshots `cadgen +0.8.4 snapshot <id> out.png --display shaded`.
   Headless Linux needs Xvfb (`Xvfb :99 & export DISPLAY=:99`); a desktop session doesn't.
   Telemetry was turned off: `uvx ... cadgen telemetry off`.
 - Analysis Python: `pip install -r tools/requirements.txt` (system Python, not cadgen's).
@@ -109,7 +113,7 @@ tools/              requirements.txt, shelf_groups.json, run_shelves.sh, make_po
 
 ## Open items (next session)
 1. **Mike: TODO.md Job 1B** settles the glue-plane spacing. If it changes, update P_FLAT/P_DISC in `cad/slab.py`, `analysis/core_proxy.py`, `analysis/core_proxy2.py` and `tools/place_shelves.py`, then rebuild.
-2. Printable set, after item 1: seam joint at z≈158, inserts (0.6 mm, 14 × 2.5), TPU feet, export STL/3MF/STEP.
+2. Printable set, after item 1 and the end-wall design: slide-in clip channels, stepped seam near z≈158, inserts (0.6 mm, 14 × 2.5), TPU feet, export STL/3MF/STEP.
 3. Grille still has small bites where it meets the shelf pads. Accept them or move the pads.
 4. Skirt tab: `plate()` now gives one solid per plate and no separate tab was found; confirm by eye, then close.
 5. **Before any full print:** print `deliverables/coupon_F11_small_corner.stl` and `coupon_F5_large_spring.stl`

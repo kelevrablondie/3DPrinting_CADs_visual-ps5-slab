@@ -21,6 +21,8 @@ Z_MID = CORE_L / 2
 FLOOR, WALL, R = 2.5, 2.5, 10.0
 REVEAL = 4.0                       # gap between straight skirt edge and core face edge
 POCKET = 0.8                       # shelf alignment pockets
+# end wall edge |x| at rear, front (y = -+D/2), from analysis/end_edges.py; rerun it if the core proxy changes
+END_FLAT, END_DISC = (48.5, 35.3), (39.9, 46.3)
 COL_PLATE, COL_CORE, COL_DRIVE = "#c6c4be", "#1d1d1f", "#dcdcd8"
 COL_SHELF, COL_FOOT = "#8c8c8c", "#3a3a3c"
 ACCENT = ["#d8343a", "#e8b923", "#2fa58f", "#3b6fc4"]
@@ -45,6 +47,17 @@ def prism_xz(pts, ydir):
     return bd.extrude(face, amount=D, dir=(0, ydir, 0))
 
 
+def end_wall_cut(edge, rear, front, z0, z1):
+    """everything below the slanted end wall edge; ramps to the skirt edges (rear, front) around the corners"""
+    r, f = edge
+    at = lambda y: r + (f - r) * (y + D / 2) / D
+    ya, yb = -D / 2 + R, D / 2 - R
+    pts = [(0, -D / 2 - 1), (rear, -D / 2 - 1), (rear, -D / 2), (at(ya), ya), (at(yb), yb),
+           (front, D / 2), (front, D / 2 + 1), (0, D / 2 + 1)]
+    face = bd.Face(bd.Wire.make_polygon([bd.Vector(x, y, z0) for x, y in pts], close=True))
+    return bd.extrude(face, amount=z1 - z0, dir=(0, 0, 1))
+
+
 def plate(side):
     """side +1 = flat plate (built at +X); -1 = disc plate (built at +X, mirrored)."""
     P = P_FLAT if side > 0 else P_DISC
@@ -57,9 +70,17 @@ def plate(side):
     ring = bd.extrude(outline(x_in), amount=P - x_in) - bd.extrude(outline(x_in - 1, WALL), amount=P - x_in + 2)
     rear_cut = prism_xz(edge_line(ar0, ar1), -1)
     front_cut = prism_xz(edge_line(af0, af1), +1)
-    ring = ring - rear_cut - front_cut
-    for z0, z1 in ((-10, R + 1), (L - R - 3, L + 5)):                           # no skirt across the ends: the core fills them
-        ring = ring - bd.Pos(P / 2, 0, (z0 + z1) / 2) * bd.Box(P, D + 10, z1 - z0)
+    # each end is a wedge: the core nearly fills one side (no wall), the other gets a slanted wall
+    tan0, tan1 = R - 2, L - R - 2                                    # where the outline's end corners meet its long sides
+    ar, af = lambda z: ar0 + (ar1 - ar0) * z / CORE_L, lambda z: af0 + (af1 - af0) * z / CORE_L
+    if side > 0:
+        w0, w1, z0, z1, edge, tan = -10, tan0, L - R - 3, L + 5, END_FLAT, tan0
+    else:
+        w0, w1, z0, z1, edge, tan = tan1, L + 5, -10, R + 1, END_DISC, tan1
+    wall_zone = bd.Pos(P / 2, 0, (w0 + w1) / 2) * bd.Box(P, D + 10, w1 - w0)
+    ring = ring - (rear_cut - wall_zone) - (front_cut - wall_zone)   # skirt cuts would notch the wall
+    ring = ring - end_wall_cut(edge, ar(tan), af(tan), w0, w1)
+    ring = ring - bd.Pos(P / 2, 0, (z0 + z1) / 2) * bd.Box(P, D + 10, z1 - z0)
     if side < 0:                                                     # drive notch: frame the drive face
         ring = ring - bd.Pos(P / 2, D / 2, DRIVE_Z / 2) * bd.Box(P, 60, DRIVE_Z + 2 * REVEAL + 10)
     body = floor + ring
