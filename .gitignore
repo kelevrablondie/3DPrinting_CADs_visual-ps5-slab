@@ -5,3 +5,9 @@ __pycache__/
 cad/core/*.step
 # rejected concept, 40 MB
 deliverables/adapter_flat_concept.stl
+# third-party files kept locally only (no redistribution licence)
+sources/ps5-cover-standard-edition/
+sources/obj-visual-model/
+sources/max-visual-model/
+sources/reference-images/style_reference_render_*
+sources/reference-images/devynpc_clip_shelves_photo.webp

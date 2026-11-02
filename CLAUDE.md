@@ -40,6 +40,7 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 - Print tiles face-down on textured PEI for a uniform outer finish.
 
 ## Data provenance & trust (important)
+Not in the public repo, local only and gitignored: `sources/ps5-cover-standard-edition/`, `sources/obj-visual-model/`, `sources/max-visual-model/`, `style_reference_render_*`, `devynpc_clip_shelves_photo.webp`. History was purged with git-filter-repo on 2026-11-02. Backup: `../ps5-slab-backup-20261102-2025/`.
 | Source | Use | Trust |
 |---|---|---|
 | `sources/rhys34512-printables-973426/` – Rhys34512, Printables #973426, **CC BY-NC 4.0** | Clip geometry, inner surfaces, glue planes | **Fit-critical basis.** Hobbyist scan-derived, author printed & installed. Unverified by us → print `deliverables/coupon_*.stl` first |

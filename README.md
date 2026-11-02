@@ -62,3 +62,12 @@ Designed with [Claude Code](https://claude.com/claude-code). Clip geometry and p
 Copyright (c) 2026 beliykelevra. Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): free to share and adapt with attribution, not for commercial use. Full text in `LICENSE`.
 
 Third-party files in `sources/` are not covered by this grant and remain under their own authors' terms.
+
+### Third-party material in this repo
+| Files | Source | Licence |
+|---|---|---|
+| `sources/rhys34512-printables-973426/` | "PS5 (Original - not slim) Side Panels" by Rhys34512, Printables #973426 | CC BY-NC 4.0 |
+| `sources/reference-images/teardown_ifixit.jpg`, `xray_creative_electron_ifixit.jpg` | iFixit PS5 teardown; X-ray by Creative Electron, published by iFixit | CC BY-NC-SA 3.0 (iFixit) |
+| `sources/reference-images/xray_fan_fit_overlay.png` | Our overlay on the iFixit X-ray above | CC BY-NC-SA 3.0, as a derivative |
+
+Other references used during design (style renders, a devynPC photo, two visual PS5 models, a MakerWorld copy of the scan) are **not included**, because their licences don't allow redistribution or are unknown.
