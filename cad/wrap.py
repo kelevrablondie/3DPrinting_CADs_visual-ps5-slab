@@ -13,9 +13,20 @@ CLR, LIP = 0.5, 2.5                          # lip-to-core clearance, lip wall t
 YF = 127.5                                   # core face |y| (proxy), plate floor half-depth (255 / 2)
 Z0, Z1 = -CLR, CORE_L + CLR                  # floor and face/back lips span
 HEX_F, HEX_W = 6.0, 1.2                      # honeycomb: hole across flats, web -> ~69 % open
-FAN_Y, FAN_Z, FAN_R = 3.0, 305.0, 55.0       # fan grille (as slab.py)
+FAN_Y, FAN_Z = 3.0, 305.0                     # fan centre (as slab.py)
 SLOT_Z, SLOT_X = (22.5, 145.0), (-25.5, -20.5)   # disc slot, from the stock disc-plate scan
 COL_LIP = "#bdbbb5"                          # a shade off the plate so the strips read as separate parts
+ENGRAVE, GROOVE = 0.4, 1.0                   # engraving depth, panel-line width
+# tile seam as a faceted panel line (y, z): clears every clip of BOTH plates by >= 3 mm
+SEAM = [(-YF - 3, 164.0), (-70.0, 164.0), (-64.0, 158.0), (YF + 3, 158.0)]
+PANEL_H, PANEL_C = 62.0, 14.0                # fan panel: half size, corner chamfer (hides the round fan)
+FONT = "/usr/share/fonts/source-foundry-hack-fonts/Hack-Regular.ttf"
+NAME = "[MONOLITH] U-05"
+# shortcut: clip footprints (y0, y1, z0, z1) copied from cad/core/shelf_*_c.stl bounds; regenerate when the
+# slide-in clip strips are designed
+SHELVES = {"flat": [(-116, 118, 17, 50), (-118, -45, 170, 366), (-59, 39, 174, 251), (60, 104, 209, 337),
+                    (97, 117, 123, 155)],
+           "disk": [(-117, -97, 17, 49), (-118, -45, 167, 365), (-61, 41, 161, 251), (60, 84, 294, 336)]}
 
 
 def box(x0, x1, y0, y1, z0, z1):
@@ -58,6 +69,37 @@ def holes(axis, length, at, pts):
     return bd.Compound([bd.Pos(*pos(a, b)) * t for a, b in pts])
 
 
+def panel_pts():
+    y0, z0, h, c = FAN_Y, FAN_Z, PANEL_H, PANEL_C
+    return [(y0 - h + c, z0 - h), (y0 + h - c, z0 - h), (y0 + h, z0 - h + c), (y0 + h, z0 + h - c),
+            (y0 + h - c, z0 + h), (y0 - h + c, z0 + h), (y0 - h, z0 + h - c), (y0 - h, z0 - h + c)]
+
+
+def top_groove(pts, x_top, closed=False):
+    """1 mm panel line, ENGRAVE deep, along (y, z) points on the outer face at x_top (+X side)"""
+    pts = pts + pts[:1] if closed else pts
+    cut = []
+    for (y0, z0), (y1, z1) in zip(pts, pts[1:]):
+        dy, dz = y1 - y0, z1 - z0
+        n = (dy * dy + dz * dz) ** 0.5
+        oy, oz = -dz / n * GROOVE / 2, dy / n * GROOVE / 2
+        quad = [(y0 + oy, z0 + oz), (y1 + oy, z1 + oz), (y1 - oy, z1 - oz), (y0 - oy, z0 - oz)]
+        face = bd.Face(bd.Wire.make_polygon([bd.Vector(x_top + 0.01, y, z) for y, z in quad], close=True))
+        cut.append(bd.extrude(face, amount=ENGRAVE + 0.01, dir=(-1, 0, 0)))
+    for y, z in pts:                                                   # round the joints
+        cut.append(bd.Pos(x_top, y, z) * bd.Rot(0, 90, 0) * bd.Cylinder(GROOVE / 2, 2 * ENGRAVE))
+    return bd.Compound(cut)
+
+
+def top_text(txt, size, y_base, z_start, x_top):
+    """engraved text on the +X outer face, reading +Z (left to right seen from the front), glyph tops toward -Y"""
+    pl = bd.Plane(origin=(x_top + 0.01, y_base, z_start), x_dir=(0, 0, 1), z_dir=(1, 0, 0))
+    t = pl * bd.Text(txt, font_size=size, font_path=FONT, align=(bd.Align.MIN, bd.Align.MIN))
+    solid = bd.extrude(t, amount=ENGRAVE + 0.01, dir=(-1, 0, 0))
+    assert solid.volume > 0, txt
+    return solid
+
+
 def plate_set(side):
     """side +1 = flat plate (north when lying), -1 = disc plate (south, bottom)"""
     name = "flat" if side > 0 else "disk"
@@ -71,9 +113,22 @@ def plate_set(side):
     # floor tray (one part here; the stepped two-tile seam is not drawn yet)
     floor = box(*fl, -YF, YF, Z0, Z1)
     floor = bd.fillet(floor.edges().filter_by(bd.Axis.X), 3)
-    fan = [(a, b) for a, b in hex_grid(FAN_Z - FAN_R, FAN_Z + FAN_R, FAN_Y - FAN_R, FAN_Y + FAN_R)
-           if (a - FAN_Z) ** 2 + (b - FAN_Y) ** 2 <= (FAN_R - HEX_F / 2) ** 2]
+    h, m = PANEL_H - 4, HEX_F / 2 + 2.5                               # hole field inside the panel line
+    def keep(z, y):
+        dy, dz = abs(y - FAN_Y), abs(z - FAN_Z)
+        if dy > h - m or dz > h - m or dy + dz > 2 * PANEL_H - PANEL_C - 6 - m:
+            return False
+        return not any(y0 - m < y < y1 + m and z0 - m < z < z1 + m for y0, y1, z0, z1 in SHELVES[name])
+    fan = hex_grid(FAN_Z - PANEL_H, FAN_Z + PANEL_H, FAN_Y - PANEL_H, FAN_Y + PANEL_H, inside=keep)
     floor = floor - holes("x", FLOOR + 2, (fl[0] + fl[1]) / 2, fan)
+    if side > 0:                                                      # north top: panel lines + markings
+        x_top = out
+        floor = floor - top_groove(SEAM, x_top) - top_groove(panel_pts(), x_top, closed=True)
+        floor = floor - top_text(NAME, 5.0, YF - 7, 20, x_top)
+        floor = floor - top_text("INTAKE", 3.5, FAN_Y + PANEL_H + 11, FAN_Z - 6, x_top)
+        for k in range(8):                                             # tick row left of INTAKE
+            z = FAN_Z - 40 + 3 * k
+            floor = floor - box(x_top - ENGRAVE, x_top + 0.01, FAN_Y + PANEL_H + 7, FAN_Y + PANEL_H + 11, z - 0.4, z + 0.4)
     floor.color, floor.label = COL_PLATE, f"plate_{name}"
     parts.append(floor)
 
@@ -88,6 +143,8 @@ def plate_set(side):
             if side < 0:                                                   # disc slot, scan-derived
                 wall = wall - box(*SLOT_X, y_in - 1, y_out + 1, *SLOT_Z)
         wall = wall - holes("y", LIP + 2, (y_in + y_out) / 2, vent)
+        zs = SEAM[-1][1] if ys > 0 else SEAM[0][1]                      # lip split line continues the seam
+        wall = wall - box(lo, hi, y_out - ys * ENGRAVE, y_out + ys * 0.01, zs - GROOVE / 2, zs + GROOVE / 2)
         extras = []
         if tag == "face" and side > 0:                                     # colour inserts, seen from the sofa
             xc = (lo + hi) / 2

@@ -4,6 +4,7 @@ Flat, PS1-grey replacement side plates that turn an original PS5 Disc Edition in
 > **Status: pre-alpha draft.** Not printed, and the fit is not tested. Some parts are still placeholders, listed under [What's missing](#whats-missing).
 
 ![Draft, isometric](cad/renders/wrap_iso.png)
+![Draft, top](cad/renders/wrap_top.png)
 ![Draft, face](cad/renders/wrap_face.png)
 
 ## Design
@@ -11,8 +12,9 @@ Flat, PS1-grey replacement side plates that turn an original PS5 Disc Edition in
 - **Wrap-around plates.** Two flat plates (north and south) wrap the console with **level lips** on the face, back and both ends. A **constant 40 mm black stripe** of the console body stays visible all round, which hides the stock curves.
 - **Separate lip strips.** The lips are printed as their own strips and welded to the plate edge, so the plate tiles stay 255 mm deep and fit a 256 mm print bed.
 - **Disc drive behind the lip.** The drive sits behind the level south lip, like on the stock faceplate. The disc slot's size and position are taken from a scan of the stock plate: about 122.5 × 5 mm.
-- **Honeycomb vents everywhere.** 6 mm hexagonal holes with 1.2 mm webs, ~69 % open: the Ø110 fan grilles on both plates, the face lips at the fan end, the back lips along their full length (they cover the exhaust), and both end walls.
+- **Honeycomb vents everywhere.** 6 mm hexagonal holes with 1.2 mm webs, ~69 % open: the fan grilles on both plates, the face lips at the fan end, the back lips along their full length (they cover the exhaust), and both end walls.
 - **Four-colour inserts** on the face, visible from where you sit. No Sony logos or trademarks.
+- **Engraved top, single grey.** The tile seam is drawn as a faceted panel line, so the joint hides in a deliberate groove. The fan grille sits inside a chamfered panel outline, and small mono markings read `[MONOLITH] U-05` and `INTAKE`.
 - **Slide-in, replaceable clip strips** hold the plates onto the console's stock clip points.
 - **Materials:** ASA or ABS for the plates, lips and clips, TPU for the feet. No PLA, because of the heat.
 
