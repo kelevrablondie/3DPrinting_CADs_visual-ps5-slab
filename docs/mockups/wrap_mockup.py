@@ -41,7 +41,8 @@ def frame(ax, title, w):
 
 def face(ax):
     """you looking at the front: W (fan) left, E (drive) right. u = 380 - z"""
-    frame(ax, "FACE (working view): W fan end left, E drive end right", 384)
+    frame(ax, "FACE (working view): E drive end left, W fan end right", 384)
+    ax.invert_xaxis()                                                     # trust the scan-based model: drive end on the left
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)               # both lips level, end to end
     # drive (z 0..135) sits behind the south lip, like the stock plate; dashed = hidden
@@ -60,7 +61,8 @@ def face(ax):
 
 def back(ax):
     """looking at the back: E left, W right. u = z"""
-    frame(ax, "BACK: E left, W right. Lips cover the exhaust, so they are vented end to end", 384)
+    frame(ax, "BACK: W left, E right. Lips cover the exhaust, so they are vented end to end", 384)
+    ax.invert_xaxis()
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)
     honeycomb(ax, L0, L1, B_HI, TOP); honeycomb(ax, L0, L1, BOT, B_LO)
@@ -81,6 +83,6 @@ def end(ax, title, front_right):
 fig = plt.figure(figsize=(11, 12), facecolor=BG)
 gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 1])
 face(fig.add_subplot(gs[0, :])); back(fig.add_subplot(gs[1, :]))
-end(fig.add_subplot(gs[2, 0]), "WEST end (fan)", True); end(fig.add_subplot(gs[2, 1]), "EAST end (drive)", False)
+end(fig.add_subplot(gs[2, 0]), "EAST end (drive)", True); end(fig.add_subplot(gs[2, 1]), "WEST end (fan)", False)
 fig.suptitle("Wrap-around plates: level lips, constant black stripe, 6 mm hex honeycomb vents, 69 % open (true scale, mm)", fontsize=12)
 fig.savefig(sys.argv[1], dpi=110, facecolor=BG, bbox_inches="tight")
