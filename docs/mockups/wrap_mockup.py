@@ -41,16 +41,16 @@ def face(ax):
     """you looking at the front: W (fan) left, E (drive) right. u = 380 - z"""
     frame(ax, "FACE (working view): W fan end left, E drive end right", 384)
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
-    ax.add_patch(Rectangle((380 - 165, BOT), 167, B_LO - BOT, fc="#6b6b70"))   # open gap behind the swoop
-    lip(ax, L0, L1, B_HI, TOP)                                            # north lip
-    sw0, sw1 = 380 - 165, 380 - 140                                       # south lip swoops down over the drive (z 0..135)
-    ax.add_patch(Polygon([(L0, BOT), (L1, BOT), (L1, BOT + 4.8), (sw1, BOT + 4.8), (sw0, B_LO), (L0, B_LO)],
-                         fc=PLATE, ec="#888", lw=0.4))
-    ax.add_patch(Rectangle((380 - 135, -50.8), 135, -17.8 + 50.8, fc=DRIVE, ec="#999", lw=0.4))
+    lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)               # both lips level, end to end
+    # drive (z 0..135) sits behind the south lip, like the stock plate; dashed = hidden
+    ax.add_patch(Rectangle((380 - 135, -50.8), 135, -17.8 + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
+    # disc slot hole: ~126 x 6 placeholder, centred on the drive; real position from TODO Job 1D
+    ax.add_patch(Rectangle((380 - 67.5 - 63, -34.3 - 3), 126, 6, fc=CORE, ec="#444", lw=0.4, joinstyle="round"))
     vents(ax, L0, 120, B_HI, TOP); vents(ax, L0, 120, BOT, B_LO)
     for i, col in enumerate(ACCENT):                                      # 4 inserts, 2.5 x 14 each
         ax.add_patch(Rectangle((338 + i * 4, C + BAND / 2 + 39.5 / 2 - 7), 2.5, 14, fc=col, lw=0))
-    ax.text(300, -36, "disc drive", ha="center", fontsize=7)
+    ax.text(312, -27, "drive behind the lip (dashed)", ha="center", fontsize=6.5)
+    ax.text(312, -46, "disc slot hole, position to measure", ha="center", fontsize=6.5)
     ax.text(250, 40, "north lip 39.5", fontsize=7); ax.text(150, 0, "black stripe 40, constant", color="w", fontsize=7)
     ax.text(150, -40, "south lip 39.5", fontsize=7)
     ax.text(345, 66, "colour inserts", fontsize=6.5, ha="center")

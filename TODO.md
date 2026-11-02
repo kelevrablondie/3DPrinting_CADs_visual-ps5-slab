@@ -97,7 +97,7 @@ The new plates have edges that cover part of the black middle. Claude needs to k
 - [ ] Look at the **back**. For each plug in the table, measure two things:
   - **From the drive end:** from the drive end of the black part to the near edge and to the far edge of the plug.
   - **Up from the table:** from the table to the bottom edge and to the top edge of the plug.
-- [ ] Do the same on the **front** for the USB plugs and the two buttons.
+- [ ] Do the same on the **front** for the USB plugs, the two buttons and the disc slot.
 
 | Where | Plug or button | From drive end: near / far (mm) | Up from table: bottom / top (mm) |
 |---|---|---|---|
@@ -110,6 +110,7 @@ The new plates have edges that cover part of the black middle. Claude needs to k
 | Front | USB-C | ___ / ___ | ___ / ___ |
 | Front | Power button | ___ / ___ | ___ / ___ |
 | Front | Eject button | ___ / ___ | ___ / ___ |
+| Front | Disc slot (the opening, not the whole drive) | ___ / ___ | ___ / ___ |
 
 - [ ] One more: at the **back**, measure how tall the black part is (table side to top side) at the drive end and at the fan end.
 

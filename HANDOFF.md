@@ -76,7 +76,7 @@ Devyn Johnston, https://youtu.be/yilU2dU2YgA (4:50, 20 Jan 2025). This is the fi
 ## Wrap-around mockup (2026-11-02)
 Mike pointed to the 1:05 sketch in video 2: plates as level, constant-height lips with a constant black stripe between them, and the same treatment on the west and east ends. The colour inserts move to the **face**. Drawing: `docs/mockups/wrap_views.png`, made with `python3 -I docs/mockups/wrap_mockup.py <out.png>`.
 - Stripe 40 mm, centred on the core (x −17.8…22.2), which is the core's narrowest front width. Each lip comes out at 39.5 mm, so the front reads as thirds.
-- Face: vents on both lips at the fan (W) end. The south lip swoops down over the drive (z 0…135). The colour inserts sit on the north lip at the E end.
+- Face: vents on both lips at the fan (W) end. The south lip runs level over the drive (z 0…135), and the drive sits behind it with a disc slot hole like the stock faceplate (Mike, 2026-11-02; replaces the swoop). In the core proxy the drive is x −50.8…−17.8, inside the lip, and flush with the core face at y 127.5. The colour inserts sit on the north lip at the E end.
 - Back: the lips cover the exhaust, so they are vented end to end. **Port positions are not measured**, and the lips need cut-outs there.
 - Ends: both end walls are fully vented (option D), with the same stripe.
 - **Depth problem:** a lip that hides the core's curve sits in front of the core face. The core proxy is ±127.5 deep for z 0…200 and tapers to ±121 at the fan end, so the plates grow to about 261 mm deep (0.5 clearance + 2.5 wall per side). That doesn't fit the 256 mm bed in any orientation. **Mike chose separate lip strips** welded to the plate edge (recorded in `CLAUDE.md`). Port positions: TODO.md Job 1D.
