@@ -4,8 +4,17 @@ Flat, PS1-grey replacement side plates that turn an original PS5 Disc Edition in
 > **Status: pre-alpha draft.** Not printed, and the fit is not tested. Some parts are still placeholders, listed under [What's missing](#whats-missing).
 
 ![Draft, isometric](cad/renders/wrap_iso.png)
-![Draft, top](cad/renders/wrap_top.png)
-![Draft, face](cad/renders/wrap_face.png)
+
+**Interactive 3D:** open [`docs/model/monolith_draft.stl`](docs/model/monolith_draft.stl) on GitHub to rotate and zoom the draft in the browser. It's one grey mesh of the plates, lip strips, feet and the approximate console body.
+
+### Technical mockup
+True-scale views in mm. Seen from the front, the drive end is on the left.
+
+![Technical mockup: face, back and both ends](docs/mockups/wrap_views.png)
+
+| Top | Face |
+|---|---|
+| ![Draft, top](cad/renders/wrap_top.png) | ![Draft, face](cad/renders/wrap_face.png) |
 
 ## Design
 - **Horizontal only, disc side down.** The console stands level on four TPU feet.
@@ -25,11 +34,11 @@ The model is parametric Python (build123d) built with [cadgen](https://github.co
 cadgen +0.8.4 run cad/wrap.py     # current draft; prints a viewer link
 ```
 
-`docs/mockups/wrap_views.png` is the true-scale 2D drawing: face, back and both ends. `cad/slab.py` is the earlier concept, kept for its helpers.
+To refresh the interactive STL after a change: `cadgen +0.8.4 export <id> docs/model/monolith_draft.stl`, where `<id>` is the one the run prints. `docs/mockups/wrap_mockup.py` redraws the 2D views. `cad/slab.py` is the earlier concept, kept for its helpers.
 
 ## What's missing
 - **Clip strips:** slide-in channels not designed yet. The old glued shelves stand in for them.
-- **Seam:** the diagonal, stepped seam between the two tiles of each plate is not designed yet.
+- **Seam joint:** the seam's path is set (the faceted panel line), but its stepped, self-aligning cross-section is not designed yet. The face and back lip strips also split there.
 - **Port cut-outs** in the back lips: waiting on measurements.
 - **Disc guide:** the short tunnel behind the slot and the stiffener above it.
 - **Fit:** the console body is an approximate proxy, good to about ±1–2 mm. Before printing a full plate, print a test coupon and a narrow partial test strip, then check level with a spirit level (`TODO.md`).
@@ -41,6 +50,7 @@ cadgen +0.8.4 run cad/wrap.py     # current draft; prints a viewer link
 | `analysis/` | Scan analysis: heightmaps, clip detection, sections, shelf generator |
 | `deliverables/` | Fit-test coupons, shelves v2 (glued concept) |
 | `docs/mockups/` | 2D design mockups |
+| `docs/model/` | Exported draft STL (interactive on GitHub) |
 | `sources/` | Third-party scans and reference images (their own licences) |
 | `TODO.md` | Measuring jobs and print steps |
 | `CLAUDE.md`, `HANDOFF.md` | Design decisions and working notes |
