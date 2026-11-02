@@ -61,3 +61,14 @@ Devyn Johnston, "I fixed the PS5 and now YOU can too", https://youtu.be/dNhaeyO8
 5. **Thermals (3:44–4:19):** 2 h God of War Ragnarök with stock plates vs 2 h with BoxPlates on a PS5 Pro, filmed with FLIR: same at the centre, cooler overall and at the rear vent. Not rigorous; weak evidence that open sides are safe.
 6. **Disc models (2:35–2:39)** need a new bottom plate with a hidden disc slot, which relates to Mike's "swoop" disc access. Not shown in detail.
 7. **Geometry (1:47–2:10):** he used a 3D scan, then removed the tilt and straightened the angles; "way more iterations than I expected". Expect several test prints (see Job 1B and the coupons).
+
+## Video reference 2: devynPC "I fixed the PS5 Pro" (reviewed 2026-11-02)
+Devyn Johnston, https://youtu.be/yilU2dU2YgA (4:50, 20 Jan 2025). This is the first prototype, made before BoxPlates. The console is a **PS5 Pro** (four plates, two per side), so again nothing is fit-verified for our Disc Edition. **No dimensions, materials or print settings are given.** Times are caption times; frame-only observations are approximate.
+
+1. **Alignment is the main risk (2:49–3:07):** getting each plate's tilt and angle right "took the most trial and error". **1–2 mm off** and the plates collide, clips miss, or the plate visibly isn't level. That supports Job 1B, the coupons, and a cheap partial test print before a full plate.
+2. **Check level with a spirit level (~3:20, frame):** he put a spirit level on the printed top plate. Add a spirit-level check to our test fit.
+3. **Clips rebuilt as clean CAD (~2:40–2:50, frames):** he aligned the scanned clips, then modelled clean solid clips (ribbed hooks) on top of them instead of using the scan mesh. Our shelves come from scan meshes (`analysis/shelves.py`). When we design the slide-in strips, rebuild the hooks as parametric solids from our clip cross-sections (`analysis/section*.py`).
+4. **The first prototype had fixed clips; BoxPlates has slide-in strips.** That's an inference that he moved away from fixed clips, but the video doesn't give a reason.
+5. **Vents only where the stock plates left openings (3:24–3:34):** fan grille plus holes on the front and sides. The CAD frames (~3:40) show the hole pattern continuing over the plate's end wall and lip, which is option D. His pattern is an Xbox One S style grid of round holes with a chamfered look, taken from Microsoft's design, so again don't copy it. Our hex grille is our own.
+6. **Front lip lowered to hide the curve (0:57–1:03):** the plate lip comes down over the core's curve, leaving the glossy middle strip and its ports open. That matches our "hide" language and the level face and back edges in "What Mike asked for", item 6.
+7. **Plate as a shallow tray (~3:30, frame):** a section view shows a floor with low walls and a step partway along. That may be an early version of the stepped seam, but it can't be confirmed from the frame.
