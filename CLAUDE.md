@@ -36,7 +36,7 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Source | Use | Trust |
 |---|---|---|
 | `sources/rhys34512-printables-973426/` – Rhys34512, Printables #973426, **CC BY-NC 4.0** | Clip geometry, inner surfaces, glue planes | **Fit-critical basis.** Hobbyist scan-derived, author printed & installed. Unverified by us → print `deliverables/coupon_*.stl` first |
-| `sources/ps5-cover-standard-edition/` | Same scan, decimated (median dev. 0.13 mm). The full "cd" disc panel was a byte-identical duplicate of `disk-panel.stl` (17-byte header diff) → omitted | Duplicate, cross-check only |
+| `sources/ps5-cover-standard-edition/` – MakerWorld #2863474 per the STL headers; creator and licence unconfirmed | Same scan, decimated (median dev. 0.13 mm). The full "cd" disc panel was a byte-identical duplicate of `disk-panel.stl` (17-byte header diff) → omitted | Duplicate, cross-check only |
 | `sources/obj-visual-model/PS5.obj` (units ×200 = mm) | Proportions / visual only | **Not dimensional** (core depth 242 vs real 255) |
 | `sources/max-visual-model/ps5v2disk.max` | Nothing – created 13 Jun 2020 (2 days after reveal, before launch) = built from renders | Not usable |
 | X-ray (`reference-images/xray_*`, Creative Electron / iFixit) | Fan position; scale checked (outline 553 px = 390 mm ⇒ fan blades 170 px = 120 mm ✓) | ±5 mm |

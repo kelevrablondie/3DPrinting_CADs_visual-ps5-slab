@@ -66,6 +66,26 @@ Job 1 was Claude's mistake, not yours. The PS5 tips a little when it lies down, 
 
 ---
 
+## Job 1C: How far does the plate slide?
+
+This tells Claude how much room a closed end needs.
+
+**You need:** tape measure, a small piece of sticky tape, and a pen.
+
+- [ ] Turn the PS5 off and pull out every cable.
+- [ ] Lay the PS5 down with the **disc bump facing down**, so the flat white plate is on top.
+- [ ] Stick the tape across the edge, half on the white plate and half on the black part.
+- [ ] Draw one straight line across the tape, from the white part onto the black part.
+- [ ] Slice the tape along the edge between white and black, so the plate can move.
+- [ ] Slide the plate off the way you do when you clean the PS5, but **stop as soon as it comes loose**.
+- [ ] Measure how far apart the two halves of your line are now.
+
+**Slide distance:** ______ mm
+
+- [ ] Put the plate back until it clicks, and peel off the tape.
+
+---
+
 ## Job 2: Make a pretend plate (skipped, see job 3)
 
 A cardboard plate shows you how the real one will look, before anyone prints anything.
@@ -142,6 +162,7 @@ A bigger bed means less squeezing for question 2. If you don't know yet, write "
 - [X] Give Claude your two numbers from Job 1.
 - [X] Give Claude your picks from Job 3.
 - [ ] Give Claude your two numbers from Job 1B.
+- [ ] Give Claude your slide distance from Job 1C.
 
 Claude finishes the computer work after that. You're done until you have a printer!
 
