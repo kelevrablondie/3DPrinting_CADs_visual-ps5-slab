@@ -1,0 +1,48 @@
+{
+ "plane_x": 374.73881008647663,
+ "outboard": "+X",
+ "bottom": {
+  "file": "shelf_flat_bottom.stl",
+  "clips": 3,
+  "extents_mm": [
+   38.8,
+   234.5,
+   33.5
+  ],
+  "volume_cm3": 105.4,
+  "watertight": true
+ },
+ "left": {
+  "file": "shelf_flat_left.stl",
+  "clips": 3,
+  "extents_mm": [
+   30.0,
+   73.2,
+   195.5
+  ],
+  "volume_cm3": 74.5,
+  "watertight": true
+ },
+ "right": {
+  "file": "shelf_flat_right.stl",
+  "clips": 3,
+  "extents_mm": [
+   33.6,
+   57.0,
+   214.0
+  ],
+  "volume_cm3": 71.2,
+  "watertight": true
+ },
+ "middle": {
+  "file": "shelf_flat_middle.stl",
+  "clips": 2,
+  "extents_mm": [
+   24.3,
+   98.0,
+   76.8
+  ],
+  "volume_cm3": 38.6,
+  "watertight": true
+ }
+}

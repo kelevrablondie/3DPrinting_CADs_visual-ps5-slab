@@ -1,0 +1,9 @@
+trimesh
+manifold3d
+numpy
+scipy
+scikit-image
+shapely
+matplotlib
+fast_simplification
+olefile
