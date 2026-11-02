@@ -94,3 +94,5 @@ Mike: the back edges must not obstruct the exhaust, so use bigger openings or a 
 - The round 3.4 mm holes at 5 mm pitch are 42 % open, which leaves **~79 %** of the stock exhaust area overall. A **6 mm hex honeycomb with 1.2 mm webs** is 69 % open, which gives **~89 %**. It's printable: three perimeters at 0.4 mm, holes vertical with the strip face-down. Chosen and drawn in `wrap_views.png`.
 - Further lever if the heat test says so: let the back lip stand off the core by a few mm to form a plenum, so air can spread to the open stripe. The lip strips aren't limited by bed depth. Not drawn.
 - These are area estimates, not a flow test. Airflow is unverified until the optional heat test.
+
+**Update:** Mike chose the honeycomb for every vent, fan grilles included (2026-11-02). The 2D mockup `wrap_views.png` is final at this stage, and the next step is a 3D draft.

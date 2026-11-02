@@ -5,7 +5,7 @@ import sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Polygon, Circle, RegularPolygon
+from matplotlib.patches import Rectangle, Polygon, RegularPolygon
 
 PLATE, CORE, DRIVE, VENT, BG = "#c6c4be", "#1d1d1f", "#dcdcd8", "#55555a", "#f4f5f7"
 ACCENT = ["#d8343a", "#e8b923", "#2fa58f", "#3b6fc4"]
@@ -14,18 +14,6 @@ C, BAND = 2.2, 40.0                      # stripe centred on the core, = narrowe
 B_HI, B_LO = C + BAND / 2, C - BAND / 2  # 22.2, -17.8 -> lips 39.5 mm each
 L0, L1 = -2.0, 382.0                     # plate span along the length (core 0..380)
 D = 255.0
-
-
-def vents(ax, u0, u1, x0, x1, pitch=5.0, r=1.7, inset=3.0):
-    """our hex hole pattern (3.4 mm holes, 5 mm pitch) filling a rectangle"""
-    row, x = 0, x0 + inset + r
-    while x <= x1 - inset - r:
-        u = u0 + inset + r + (pitch / 2 if row % 2 else 0)
-        while u <= u1 - inset - r:
-            ax.add_patch(Circle((u, x), r, color=VENT, lw=0))
-            u += pitch
-        x += pitch * 0.866
-        row += 1
 
 
 def honeycomb(ax, u0, u1, x0, x1, flats=6.0, web=1.2, inset=2.5):
@@ -60,7 +48,7 @@ def face(ax):
     ax.add_patch(Rectangle((380 - 135, -50.8), 135, -17.8 + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
     # disc slot from the stock disc plate scan: z' 22.5..145, straight disc path x' -25.5..-20.5
     ax.add_patch(Rectangle((380 - 145, -25.5), 145 - 22.5, 5, fc=CORE, ec="#444", lw=0.4))
-    vents(ax, L0, 120, B_HI, TOP); vents(ax, L0, 120, BOT, B_LO)
+    honeycomb(ax, L0, 120, B_HI, TOP); honeycomb(ax, L0, 120, BOT, B_LO)
     for i, col in enumerate(ACCENT):                                      # 4 inserts, 2.5 x 14 each
         ax.add_patch(Rectangle((338 + i * 4, C + BAND / 2 + 39.5 / 2 - 7), 2.5, 14, fc=col, lw=0))
     ax.text(312, -40, "drive behind the lip (dashed)", ha="center", fontsize=6.5)
@@ -72,7 +60,7 @@ def face(ax):
 
 def back(ax):
     """looking at the back: E left, W right. u = z"""
-    frame(ax, "BACK: E left, W right. Lips cover the exhaust: 6 mm hex honeycomb, 69 % open, end to end", 384)
+    frame(ax, "BACK: E left, W right. Lips cover the exhaust, so they are vented end to end", 384)
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)
     honeycomb(ax, L0, L1, B_HI, TOP); honeycomb(ax, L0, L1, BOT, B_LO)
@@ -85,7 +73,7 @@ def end(ax, title, front_right):
     frame(ax, title, D)
     ax.add_patch(Rectangle((0, B_LO), D, BAND, fc=CORE))
     lip(ax, 0, D, B_HI, TOP); lip(ax, 0, D, BOT, B_LO)
-    vents(ax, 0, D, B_HI, TOP); vents(ax, 0, D, BOT, B_LO)
+    honeycomb(ax, 0, D, B_HI, TOP); honeycomb(ax, 0, D, BOT, B_LO)
     fx = D - 2 if front_right else 2
     ax.text(fx, -70, "front", ha="right" if front_right else "left", fontsize=7)
 
@@ -94,5 +82,5 @@ fig = plt.figure(figsize=(11, 12), facecolor=BG)
 gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 1])
 face(fig.add_subplot(gs[0, :])); back(fig.add_subplot(gs[1, :]))
 end(fig.add_subplot(gs[2, 0]), "WEST end (fan)", True); end(fig.add_subplot(gs[2, 1]), "EAST end (drive)", False)
-fig.suptitle("Wrap-around plates: level lips, constant black stripe (true scale, mm)", fontsize=12)
+fig.suptitle("Wrap-around plates: level lips, constant black stripe, 6 mm hex honeycomb vents, 69 % open (true scale, mm)", fontsize=12)
 fig.savefig(sys.argv[1], dpi=110, facecolor=BG, bbox_inches="tight")

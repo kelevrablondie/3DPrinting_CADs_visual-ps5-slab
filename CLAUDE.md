@@ -15,7 +15,7 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Orientation | Horizontal only, **disc-side plate down**, level on its feet. Chosen for the APU's liquid metal: either flat side keeps gravity square to the die, and disc-down should leave the die facing up (inferred from iFixit's teardown order, not confirmed) |
 | Plate depth / seam | **255 mm deep, 2 tiles split near z≈158** (tiles ~160 + 224 mm). Seam is now **diagonal + stepped** (BoxPlates-style, self-aligning, stiffer), not a straight cut; it must still clear every clip strip. Shape not designed yet |
 | Edges (revisited) | Slanted reveal kept (cardboard mock-up skipped) |
-| Grille (revisited) | Ø110 with 3.4 mm holes |
+| Grille / vents (2026-11-02) | **6 mm hex honeycomb, 1.2 mm webs (~69 % open) everywhere**: Ø110 fan grilles, face lips at the fan end, back lips end to end, both end walls. Replaces the 3.4 mm round holes |
 | Shape | Flat plates, minimal overhang, hide the stock curvature |
 | Front / rear | Open – plates never cover I/O, disc slot or rear exhaust |
 | Short ends | **Direction: option D** (2026-11-02) — no separate mesh panels; the plates' own end walls carry vent slots that wrap the corners from the fan grille (BoxPlates idea, adapted for FDM). Our own pattern, not Devyn's line pattern. Wall shape/slot details still to brainstorm, see `HANDOFF.md`. Semi-open walls in `slab.py` are rejected |
@@ -27,7 +27,7 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Channel/retention design not done; shelves v2 hook geometry is the starting point |
 | Assembly | Weld tiles on the bench (only solvent step, never near the console) → slide clip strips in → fit to console |
 | Feet | TPU, ~12 mm, on the bottom plate (bottom fan grille must breathe) |
-| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant 40 mm black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end with a **6 mm hex honeycomb, 1.2 mm webs, ~69 % open** (the round 3.4/5 grille pattern is only ~42 %), plus port cut-outs (TODO Job 1D); south face lip runs level over the drive with a disc slot hole |
+| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant 40 mm black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end (honeycomb, see Grille), plus port cut-outs (TODO Job 1D); south face lip runs level over the drive with a disc slot hole |
 | Accent placement | Colour inserts on the **north face lip** (seen from the working orientation), not on the plate top |
 
 ## Printing constraints
