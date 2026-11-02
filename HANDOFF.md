@@ -87,3 +87,10 @@ Measured in `sources/rhys34512-printables-973426/disk-panel.stl` (front-facing s
 - **Width:** 6.0–6.7 mm. It follows the plate's ~2 mm twist, and the straight path common to the whole length is x′ −25.5…−21. The mockup uses x′ −25.5…−20.5.
 - **Depth:** the stock slot is not a hole in the face. It's a gap at y′ ≈ 111–113, about 16 mm behind the core face line (127.5), between the end of the plate's angled lower wall and a hollow **box-section edge** (x′ −20…−8) above it.
 - **Consequences for the lip strip:** only ~2.7 mm of lip is left between the slot and the stripe edge (−17.8). Copy the stock idea: back that narrow bridge with a box or L section, and guide the disc from the lip slot (y′ ≈ 128–130) back to the drive entry at y′ ≈ 111 with a short tunnel or funnel. The mockup shows only the face opening.
+
+## Back-lip ventilation (2026-11-02)
+Mike: the back edges must not obstruct the exhaust, so use bigger openings or a different pattern.
+- The back lips cover the core's rear exhaust where the core is wider than the 40 mm stripe: 20 mm per side at the drive end, tapering to 2.5 mm at the fan end. That's about 8,550 of about 23,750 mm², or **~36 % of the rear exhaust face**.
+- The round 3.4 mm holes at 5 mm pitch are 42 % open, which leaves **~79 %** of the stock exhaust area overall. A **6 mm hex honeycomb with 1.2 mm webs** is 69 % open, which gives **~89 %**. It's printable: three perimeters at 0.4 mm, holes vertical with the strip face-down. Chosen and drawn in `wrap_views.png`.
+- Further lever if the heat test says so: let the back lip stand off the core by a few mm to form a plenum, so air can spread to the open stripe. The lip strips aren't limited by bed depth. Not drawn.
+- These are area estimates, not a flow test. Airflow is unverified until the optional heat test.

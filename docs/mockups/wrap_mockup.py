@@ -5,7 +5,7 @@ import sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Polygon, Circle
+from matplotlib.patches import Rectangle, Polygon, Circle, RegularPolygon
 
 PLATE, CORE, DRIVE, VENT, BG = "#c6c4be", "#1d1d1f", "#dcdcd8", "#55555a", "#f4f5f7"
 ACCENT = ["#d8343a", "#e8b923", "#2fa58f", "#3b6fc4"]
@@ -25,6 +25,20 @@ def vents(ax, u0, u1, x0, x1, pitch=5.0, r=1.7, inset=3.0):
             ax.add_patch(Circle((u, x), r, color=VENT, lw=0))
             u += pitch
         x += pitch * 0.866
+        row += 1
+
+
+def honeycomb(ax, u0, u1, x0, x1, flats=6.0, web=1.2, inset=2.5):
+    """hex holes for the exhaust: open area = (flats / (flats + web))^2 = 69 % at 6 / 1.2"""
+    p = flats + web
+    r = flats / 3 ** 0.5                                  # circumradius of a hexagon with these flats
+    row, x = 0, x0 + inset + flats / 2
+    while x <= x1 - inset - flats / 2:
+        u = u0 + inset + r + (p / 2 if row % 2 else 0)
+        while u <= u1 - inset - r:
+            ax.add_patch(RegularPolygon((u, x), 6, radius=r, orientation=0, color=VENT, lw=0))
+            u += p
+        x += p * 0.866
         row += 1
 
 
@@ -58,10 +72,10 @@ def face(ax):
 
 def back(ax):
     """looking at the back: E left, W right. u = z"""
-    frame(ax, "BACK: E left, W right. Lips cover the exhaust, so they are vented end to end", 384)
+    frame(ax, "BACK: E left, W right. Lips cover the exhaust: 6 mm hex honeycomb, 69 % open, end to end", 384)
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)
-    vents(ax, L0, L1, B_HI, TOP); vents(ax, L0, L1, BOT, B_LO)
+    honeycomb(ax, L0, L1, B_HI, TOP); honeycomb(ax, L0, L1, BOT, B_LO)
     ax.add_patch(Rectangle((0, -37.8), 100, 80, fill=False, ec="#d8343a", lw=1.2, ls="--"))
     ax.text(50, 66, "ports: positions not measured", color="#d8343a", fontsize=7, ha="center")
 
