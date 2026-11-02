@@ -80,3 +80,10 @@ Mike pointed to the 1:05 sketch in video 2: plates as level, constant-height lip
 - Back: the lips cover the exhaust, so they are vented end to end. **Port positions are not measured**, and the lips need cut-outs there.
 - Ends: both end walls are fully vented (option D), with the same stripe.
 - **Depth problem:** a lip that hides the core's curve sits in front of the core face. The core proxy is ±127.5 deep for z 0…200 and tapers to ±121 at the fan end, so the plates grow to about 261 mm deep (0.5 clearance + 2.5 wall per side). That doesn't fit the 256 mm bed in any orientation. **Mike chose separate lip strips** welded to the plate edge (recorded in `CLAUDE.md`). Port positions: TODO.md Job 1D.
+
+## Disc slot, taken from the stock disc-plate scan (2026-11-02)
+Measured in `sources/rhys34512-printables-973426/disk-panel.stl` (front-facing surfaces plus sections at z′ 56/96/166), in the console frame:
+- **Length:** z′ 22.5…145 (≈122.5 mm, for a 120 mm disc). The drive proxy stops at z 135, so the proxy is about 10 mm short.
+- **Width:** 6.0–6.7 mm. It follows the plate's ~2 mm twist, and the straight path common to the whole length is x′ −25.5…−21. The mockup uses x′ −25.5…−20.5.
+- **Depth:** the stock slot is not a hole in the face. It's a gap at y′ ≈ 111–113, about 16 mm behind the core face line (127.5), between the end of the plate's angled lower wall and a hollow **box-section edge** (x′ −20…−8) above it.
+- **Consequences for the lip strip:** only ~2.7 mm of lip is left between the slot and the stripe edge (−17.8). Copy the stock idea: back that narrow bridge with a box or L section, and guide the disc from the lip slot (y′ ≈ 128–130) back to the drive entry at y′ ≈ 111 with a short tunnel or funnel. The mockup shows only the face opening.

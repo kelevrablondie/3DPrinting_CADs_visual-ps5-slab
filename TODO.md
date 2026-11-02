@@ -110,7 +110,7 @@ The new plates have edges that cover part of the black middle. Claude needs to k
 | Front | USB-C | ___ / ___ | ___ / ___ |
 | Front | Power button | ___ / ___ | ___ / ___ |
 | Front | Eject button | ___ / ___ | ___ / ___ |
-| Front | Disc slot (the opening, not the whole drive) | ___ / ___ | ___ / ___ |
+| Front | Disc slot (the opening, not the whole drive). Claude has this from the scan; it's only a check | ___ / ___ | ___ / ___ |
 
 - [ ] One more: at the **back**, measure how tall the black part is (table side to top side) at the drive end and at the fan end.
 

@@ -20,7 +20,7 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Front / rear | Open – plates never cover I/O, disc slot or rear exhaust |
 | Short ends | **Direction: option D** (2026-11-02) — no separate mesh panels; the plates' own end walls carry vent slots that wrap the corners from the fan grille (BoxPlates idea, adapted for FDM). Our own pattern, not Devyn's line pattern. Wall shape/slot details still to brainstorm, see `HANDOFF.md`. Semi-open walls in `slab.py` are rejected |
 | Edges | Straight edges. Gaps as invisible as possible → skirt edges are straight but follow the core twist (4 mm reveal) |
-| Drive (2026-11-02) | Drive sits **behind the level south face lip**, like the stock faceplate; the lip has a **disc slot hole** (position from TODO Job 1D). Replaces the old notch and the swoop idea |
+| Drive (2026-11-02) | Drive sits **behind the level south face lip**, like the stock faceplate; the lip has a **disc slot** copied from the stock disc-plate scan (see `HANDOFF.md`, Disc slot). Replaces the old notch and the swoop idea |
 | Fan | 120 mm double-sided intake (Sony teardown + iFixit photo confirm openings both sides) → grille on **both** plates |
 | Accent | Four-colour decorative inserts (red/yellow/green/blue), no lighting. No Sony logo/trademark |
 | Colour | Plates PS1-style grey (#c6c4be); core is the console's own black |

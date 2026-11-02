@@ -44,13 +44,13 @@ def face(ax):
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)               # both lips level, end to end
     # drive (z 0..135) sits behind the south lip, like the stock plate; dashed = hidden
     ax.add_patch(Rectangle((380 - 135, -50.8), 135, -17.8 + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
-    # disc slot hole: ~126 x 6 placeholder, centred on the drive; real position from TODO Job 1D
-    ax.add_patch(Rectangle((380 - 67.5 - 63, -34.3 - 3), 126, 6, fc=CORE, ec="#444", lw=0.4, joinstyle="round"))
+    # disc slot from the stock disc plate scan: z' 22.5..145, straight disc path x' -25.5..-20.5
+    ax.add_patch(Rectangle((380 - 145, -25.5), 145 - 22.5, 5, fc=CORE, ec="#444", lw=0.4))
     vents(ax, L0, 120, B_HI, TOP); vents(ax, L0, 120, BOT, B_LO)
     for i, col in enumerate(ACCENT):                                      # 4 inserts, 2.5 x 14 each
         ax.add_patch(Rectangle((338 + i * 4, C + BAND / 2 + 39.5 / 2 - 7), 2.5, 14, fc=col, lw=0))
-    ax.text(312, -27, "drive behind the lip (dashed)", ha="center", fontsize=6.5)
-    ax.text(312, -46, "disc slot hole, position to measure", ha="center", fontsize=6.5)
+    ax.text(312, -40, "drive behind the lip (dashed)", ha="center", fontsize=6.5)
+    ax.text(296, -32, "disc slot 122.5 x 5, from stock plate scan", ha="center", fontsize=6.5)
     ax.text(250, 40, "north lip 39.5", fontsize=7); ax.text(150, 0, "black stripe 40, constant", color="w", fontsize=7)
     ax.text(150, -40, "south lip 39.5", fontsize=7)
     ax.text(345, 66, "colour inserts", fontsize=6.5, ha="center")
