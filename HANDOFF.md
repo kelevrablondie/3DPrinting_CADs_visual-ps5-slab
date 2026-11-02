@@ -96,3 +96,7 @@ Mike: the back edges must not obstruct the exhaust, so use bigger openings or a 
 - These are area estimates, not a flow test. Airflow is unverified until the optional heat test.
 
 **Update:** Mike chose the honeycomb for every vent, fan grilles included (2026-11-02). The 2D mockup `wrap_views.png` is final at this stage, and the next step is a 3D draft.
+
+## 3D draft (2026-11-02)
+`cad/wrap.py` → `wrap_horizontal` (386 × 261 × 131 mm, 29 parts, ~50 s cold build). Its parts: floor trays with a honeycomb grille, separate face, back and end lip strips (honeycomb vents, the disc slot in the south face lip, colour inserts on the north face lip), TPU feet, the core and drive proxies, and the old shelves relabelled `clip_placeholder_*`. Not drawn: stepped seam, clip channels, port cut-outs, disc guide tunnel.
+**Open question for Mike, orientation:** the model comes from the real-plate scans, and the disc slot confirms +Y is the front. Seen from the front with the console lying disc-side down, it puts the **drive end on the left**. Mike described the drive at the bottom **right**, and `wrap_views.png` follows his description. Ask him to check on the console; this affects only how the drawings are labelled, not the fit.
