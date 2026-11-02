@@ -173,6 +173,7 @@ Claude finishes the computer work after that. You're done until you have a print
 Don't do these yet.
 
 - [ ] Print the two small test pieces, and check that they click onto the PS5 and lock.
+- [ ] Print the partial test piece: a narrow strip of plate with only the clips at its ends. Click it onto the PS5 and put a spirit level on it. If it isn't level or a clip misses, tell Claude before printing anything bigger.
 - [ ] Print one plate and its clip strips. Slide the strips in and check they click onto the PS5. No glue needed for the clips.
 - [ ] Print the rest of the plates.
 - [ ] Join the two plate halves **on a table, far away from the PS5**. This is the only glue step.
