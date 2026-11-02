@@ -30,11 +30,11 @@ We have two answers and only one can be right: 104 mm or 114 mm. Let's find out!
 - [ ] If the book is tipped, measure its low side and its high side, then use the number in the middle.
 - [ ] Write down the biggest number.
 
-**Disc bump up:** ______ mm
+**Disc bump up:** 96 mm
 
 - [ ] Flip the PS5 over gently and do it all again.
 
-**Disc bump down:** ______ mm
+**Disc bump down:** 95 mm
 
 **What does it mean?**
 - Both numbers near 104: the computer model is too fat, and Claude will fix it.
@@ -43,7 +43,30 @@ We have two answers and only one can be right: 104 mm or 114 mm. Let's find out!
 
 ---
 
-## Job 2: Make a pretend plate
+## Job 1B: One more quick measuring job (only 1 minute!)
+
+Job 1 was Claude's mistake, not yours. The PS5 tips a little when it lies down, so that test couldn't give a clear answer. This one can.
+
+**You need:** tape measure and two hard books.
+
+- [ ] Stand the PS5 up in its normal upright position, with the disc drive at the bottom. Hold it steady so it can't fall.
+- [ ] Hold one book flat against each white side, about **1 cm from the top edge** (the fan end). Don't squeeze.
+- [ ] Keep the books straight and measure the gap between them.
+
+**Fan end:** ______ mm
+
+- [ ] Do the same thing **7 cm up from the bottom edge** (the drive end).
+
+**Drive end:** ______ mm
+
+**What does it mean?**
+- About **102** and **95**: the model is right. Hooray!
+- About **94** and **87**: the model is too fat, and Claude will fix it.
+- Something else: tell Claude the numbers anyway.
+
+---
+
+## Job 2: Make a pretend plate (skipped, see job 3)
 
 A cardboard plate shows you how the real one will look, before anyone prints anything.
 
@@ -88,24 +111,27 @@ A cardboard plate shows you how the real one will look, before anyone prints any
 Tick one box in each group. If you can't decide, pick the one marked **Claude's pick**.
 
 **1. Which edge looks best?**
-- [ ] A: slanted, with small gaps (**Claude's pick**, unless it looks bad in your photos)
+- [X] A: slanted, with small gaps (**Claude's pick**, unless it looks bad in your photos)
 - [ ] B: level, with bigger gaps
 
 **2. How wide should the plate be?**
-- [ ] 25.5 cm: only one join line across the plate, but it's a very tight fit on the printer (**Claude's pick**)
+- [X] 25.5 cm: only one join line across the plate, but it's a very tight fit on the printer (**Claude's pick**)
 - [ ] 25.8 cm: fits easily over the PS5, but gets a cross-shaped join line
 
 **3. Which fan holes?**
-- [ ] A circle 11 cm wide with slightly bigger holes (**Claude's pick**)
+- [X] A circle 11 cm wide with slightly bigger holes (**Claude's pick**)
 - [ ] A circle 12 cm wide with the holes we have now
 
 **4. Which side goes on the bottom?**
 - [ ] Disc side down (**Claude's pick**)
 - [ ] Flat side down
+- [X] Whichever is better for gravity on the APU (Liquid metal, has to be evenly distributed)
+
+Claude's answer: **disc side down**, sitting level on its feet.
 
 **5. Which printer will you buy?**
 
-Printer name: ______________ Its bed size: ______ × ______ mm
+Printer name: Bambulab X2D Combo with AMS Its bed size: 256 × 256 x 260 mm
 
 A bigger bed means less squeezing for question 2. If you don't know yet, write "don't know".
 
@@ -113,11 +139,11 @@ A bigger bed means less squeezing for question 2. If you don't know yet, write "
 
 ## Job 4: Tell Claude
 
-- [ ] Give Claude your two numbers from Job 1.
-- [ ] Give Claude your picks from Job 3.
-- [ ] Show Claude your photos.
+- [X] Give Claude your two numbers from Job 1.
+- [X] Give Claude your picks from Job 3.
+- [ ] Give Claude your two numbers from Job 1B.
 
-Claude does the computer work after that. You're done until you have a printer!
+Claude finishes the computer work after that. You're done until you have a printer!
 
 ---
 

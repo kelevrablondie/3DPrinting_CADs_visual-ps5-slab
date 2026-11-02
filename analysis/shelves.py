@@ -20,7 +20,9 @@ plane = (np.nanmax(inner[b:-b,b:-b]) + 2.9) if sg>0 else (np.nanmin(inner[b:-b,b
 xs = np.arange(min(x0,plane)-1, max(x1,plane)+1, res)
 X = xs[None,None,:]
 I = inner[:,:,None]
-slab = ((X-I)*sg > 0.8) & ((plane-X)*sg > 0)                       # shape (nz, ny, nx)
+POCKET = 0.8                                                       # shelf back sinks into the plate's alignment pocket (cad/slab.py)
+glue = plane + sg*POCKET
+slab = ((X-I)*sg > 0.8) & ((glue-X)*sg > 0)                        # shape (nz, ny, nx)
 slab = np.pad(slab, 1)
 v, f, _, _ = marching_cubes(slab.astype(np.float32), 0.5)
 v = (v-1)*res
@@ -28,7 +30,7 @@ S = trimesh.Trimesh(np.c_[xs[0]+v[:,2], y0+v[:,1], z0+v[:,0]], f)
 S.fix_normals()
 report = {"plane_x": float(plane), "outboard": "+X" if sg>0 else "-X"}
 T = np.array([[0,0,1,0],[1,0,0,0],[0,1,0,0],[0,0,0,1]],float)    # (u,v,w)->(y,z,x)
-xa, xb = (x0-5, plane) if sg>0 else (plane, x1+5)
+xa, xb = (x0-5, glue) if sg>0 else (glue, x1+5)
 for shelf, clips in groups.items():
     parts=[]
     for y,z,t in clips:

@@ -5,44 +5,55 @@
   "file": "shelf_flat_bottom.stl",
   "clips": 3,
   "extents_mm": [
-   38.8,
+   39.8,
    234.5,
    33.5
   ],
-  "volume_cm3": 105.4,
+  "volume_cm3": 109.8,
   "watertight": true
  },
  "left": {
   "file": "shelf_flat_left.stl",
   "clips": 3,
   "extents_mm": [
-   30.0,
+   31.0,
    73.2,
    195.5
   ],
-  "volume_cm3": 74.5,
+  "volume_cm3": 78.7,
   "watertight": true
  },
  "right": {
   "file": "shelf_flat_right.stl",
-  "clips": 3,
+  "clips": 2,
   "extents_mm": [
-   33.6,
-   57.0,
-   214.0
+   30.4,
+   44.2,
+   127.8
   ],
-  "volume_cm3": 71.2,
+  "volume_cm3": 38.7,
   "watertight": true
  },
  "middle": {
   "file": "shelf_flat_middle.stl",
   "clips": 2,
   "extents_mm": [
-   24.3,
+   25.3,
    98.0,
    76.8
   ],
-  "volume_cm3": 38.6,
+  "volume_cm3": 40.9,
+  "watertight": true
+ },
+ "right_low": {
+  "file": "shelf_flat_right_low.stl",
+  "clips": 1,
+  "extents_mm": [
+   34.6,
+   20.0,
+   32.0
+  ],
+  "volume_cm3": 18.1,
   "watertight": true
  }
 }

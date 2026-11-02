@@ -16,7 +16,7 @@ WF0, WF1 = 40.0, 75.0              # core front-face width at bottom / top end
 WR0, WR1 = 80.0, 45.0              # core rear-face width at bottom / top end
 DRIVE_Z = 135.0                    # drive spans z 0..135 on the disc side
 # ---- design parameters -----------------------------------------------------------
-L, D = 384.0, 258.0                # plate outline: length (z), depth (y)
+L, D = 384.0, 255.0                # plate outline: length (z), depth (y); 255 fits the 256 bed with one seam
 Z_MID = CORE_L / 2
 FLOOR, WALL, R = 2.5, 2.5, 10.0
 REVEAL = 4.0                       # gap between straight skirt edge and core face edge
@@ -64,7 +64,7 @@ def plate(side):
         ring = ring - bd.Pos(P / 2, D / 2, DRIVE_Z / 2) * bd.Box(P, 60, DRIVE_Z + 2 * REVEAL + 10)
     body = floor + ring
     name = "flat" if side > 0 else "disk"
-    holes = [bd.Pos(P + FLOOR / 2, y, z) * bd.Rot(0, 90, 0) * bd.Cylinder(1.6, FLOOR + 2) for y, z in GRILLE[name]]
+    holes = [bd.Pos(P + FLOOR / 2, y, z) * bd.Rot(0, 90, 0) * bd.Cylinder(1.7, FLOOR + 2) for y, z in GRILLE[name]]
     pockets = [bd.extrude(bd.Face(bd.Wire.make_polygon([bd.Vector(P - 0.01, y, z) for y, z in pts], close=True)),
                           amount=POCKET + 0.01, dir=(1, 0, 0)) for pts in POCKETS[name]]
     body = body - bd.Compound(holes) - bd.Compound(pockets)

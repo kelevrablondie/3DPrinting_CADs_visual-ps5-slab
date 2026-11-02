@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 G = json.load(open(ROOT / "tools/shelf_groups.json"))
 EXT = {"flat": (261.49, 388.23), "disk": (260.38, 387.87)}
 CLEAR = 0.15                          # pocket clearance around each shelf footprint
-FAN_Y, FAN_Z, FAN_R, PITCH, KEEPOUT = 3.0, 305.0, 60.0, 5.0, 2.5
+FAN_Y, FAN_Z, FAN_R, PITCH, KEEPOUT = 3.0, 305.0, 55.0, 5.0, 2.5
 pockets, grille = {}, {}
 for name, groups in G.items():
     W, H = EXT[name]; polys = []
