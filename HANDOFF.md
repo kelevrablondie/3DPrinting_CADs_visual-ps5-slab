@@ -72,3 +72,11 @@ Devyn Johnston, https://youtu.be/yilU2dU2YgA (4:50, 20 Jan 2025). This is the fi
 5. **Vents only where the stock plates left openings (3:24–3:34):** fan grille plus holes on the front and sides. The CAD frames (~3:40) show the hole pattern continuing over the plate's end wall and lip, which is option D. His pattern is an Xbox One S style grid of round holes with a chamfered look, taken from Microsoft's design, so again don't copy it. Our hex grille is our own.
 6. **Front lip lowered to hide the curve (0:57–1:03):** the plate lip comes down over the core's curve, leaving the glossy middle strip and its ports open. That matches our "hide" language and the level face and back edges in "What Mike asked for", item 6.
 7. **Plate as a shallow tray (~3:30, frame):** a section view shows a floor with low walls and a step partway along. That may be an early version of the stepped seam, but it can't be confirmed from the frame.
+
+## Wrap-around mockup (2026-11-02, awaiting Mike's review)
+Mike pointed to the 1:05 sketch in video 2: plates as level, constant-height lips with a constant black stripe between them, and the same treatment on the west and east ends. The colour inserts move to the **face**. Drawing: `docs/mockups/wrap_views.png`, made with `python3 -I docs/mockups/wrap_mockup.py <out.png>`.
+- Stripe 40 mm, centred on the core (x −17.8…22.2), which is the core's narrowest front width. Each lip comes out at 39.5 mm, so the front reads as thirds.
+- Face: vents on both lips at the fan (W) end. The south lip swoops down over the drive (z 0…135). The colour inserts sit on the north lip at the E end.
+- Back: the lips cover the exhaust, so they are vented end to end. **Port positions are not measured**, and the lips need cut-outs there.
+- Ends: both end walls are fully vented (option D), with the same stripe.
+- **Depth problem:** a lip that hides the core's curve sits in front of the core face. The core proxy is ±127.5 deep for z 0…200 and tapers to ±121 at the fan end, so the plates grow to about 261 mm deep (0.5 clearance + 2.5 wall per side). That doesn't fit the 256 mm bed in any orientation. Options: separate lip strips welded on, a split along the depth too, or a narrower overlap. Mike to choose.
