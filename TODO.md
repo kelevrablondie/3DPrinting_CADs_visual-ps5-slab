@@ -86,6 +86,37 @@ This tells Claude how much room the ends need. The end design is changing, so th
 
 ---
 
+## Job 1D: Where are the plugs and buttons?
+
+The new plates have edges that cover part of the black middle. Claude needs to know where every plug and button is, so the edges get holes in the right places.
+
+**You need:** tape measure, a pen, and a flat table.
+
+- [ ] Turn the PS5 all the way off and pull out every cable.
+- [ ] Lay the PS5 down with the **disc bump facing down**, the way it will sit with the new plates.
+- [ ] Look at the **back**. For each plug in the table, measure two things:
+  - **From the drive end:** from the drive end of the black part to the near edge and to the far edge of the plug.
+  - **Up from the table:** from the table to the bottom edge and to the top edge of the plug.
+- [ ] Do the same on the **front** for the USB plugs and the two buttons.
+
+| Where | Plug or button | From drive end: near / far (mm) | Up from table: bottom / top (mm) |
+|---|---|---|---|
+| Back | Power | ___ / ___ | ___ / ___ |
+| Back | HDMI | ___ / ___ | ___ / ___ |
+| Back | Network (LAN) | ___ / ___ | ___ / ___ |
+| Back | USB 1 | ___ / ___ | ___ / ___ |
+| Back | USB 2 | ___ / ___ | ___ / ___ |
+| Front | USB-A | ___ / ___ | ___ / ___ |
+| Front | USB-C | ___ / ___ | ___ / ___ |
+| Front | Power button | ___ / ___ | ___ / ___ |
+| Front | Eject button | ___ / ___ | ___ / ___ |
+
+- [ ] One more: at the **back**, measure how tall the black part is (table side to top side) at the drive end and at the fan end.
+
+**Black part at the back, drive end:** ______ mm   **Fan end:** ______ mm
+
+---
+
 ## Job 2: Make a pretend plate (skipped, see job 3)
 
 A cardboard plate shows you how the real one will look, before anyone prints anything.
@@ -163,6 +194,7 @@ A bigger bed means less squeezing for question 2. If you don't know yet, write "
 - [X] Give Claude your picks from Job 3.
 - [ ] Give Claude your two numbers from Job 1B.
 - [ ] Give Claude your slide distance from Job 1C.
+- [ ] Give Claude your table from Job 1D.
 
 Claude finishes the computer work after that. You're done until you have a printer!
 

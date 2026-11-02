@@ -27,6 +27,8 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Channel/retention design not done; shelves v2 hook geometry is the starting point |
 | Assembly | Weld tiles on the bench (only solvent step, never near the console) → slide clip strips in → fit to console |
 | Feet | TPU, ~12 mm, on the bottom plate (bottom fan grille must breathe) |
+| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant 40 mm black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end with port cut-outs (TODO Job 1D); south face lip swoops over the drive |
+| Accent placement | Colour inserts on the **north face lip** (seen from the working orientation), not on the plate top |
 
 ## Printing constraints
 - Printer: Mike plans to buy a Bambu **X2D Combo** (256 × 256 × 260 mm, heated chamber up to 65 °C; 235.5 mm wide when using both nozzles). Print the 255 mm tile side along Y: about 0.5 mm spare per side, so no brim on those edges.
