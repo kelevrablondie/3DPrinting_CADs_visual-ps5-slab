@@ -2,7 +2,7 @@
 
 Side note, not a measurement record. It checks whether the gaps in `TODO.md` (Jobs 1B, 1C, 1D) can be closed
 from files and images instead of the tape. Nothing here overrides `CLAUDE.md` or `TODO.md`; values marked ±
-are estimates until Mike confirms them.
+are estimates until Mike confirms them. Web research on the same gaps: `web-research-2026-11-09.md`.
 
 ## 1. Files evaluated this round
 
