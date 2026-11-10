@@ -5,7 +5,7 @@ Flat, PS1-grey replacement side plates that turn an original PS5 Disc Edition in
 
 ![Draft, isometric](cad/renders/wrap_iso.png)
 
-**Interactive 3D:** open [`docs/model/monolith_draft.stl`](docs/model/monolith_draft.stl) on GitHub to rotate and zoom the draft in the browser. It's one grey mesh of the plates, lip strips, feet and the approximate console body.
+**Interactive 3D:** open [`docs/model/monolith_draft.stl`](docs/model/monolith_draft.stl) on GitHub to rotate and zoom the draft in the browser. It's one grey mesh of the plates, lip strips, clip strips, feet and the approximate console body.
 
 ### Technical mockup
 True-scale views in mm. Seen from the front, the drive end is on the left.

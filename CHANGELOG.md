@@ -14,6 +14,7 @@ nothing here has been printed or test-fitted yet. See `README.md` for the projec
   strip with a matching plate offcut, built from the live model by `cad/fit_tests.py`. Print order in `TODO.md`.
 - This changelog.
 - Docs brought in line with the build: `HANDOFF.md` rewritten for the current state, 2D face mockup (`wrap_views.png`) redrawn with the 40 mm face stripe and the slot through the lip.
+- Interactive 3D (`docs/model/monolith_draft.stl`) and the face render re-exported from the final build, clip strips included.
 ### Changed
 - The south face lip now covers the core out to its narrowest face edge. The face shows one continuous 40 mm black
   band with no filler seam, the disc slot is cut through the lip, and a hidden guide is printed as one with the lip.
