@@ -2,7 +2,25 @@
 
 Read `CLAUDE.md` first, then this. Delete this file once the redesign below is settled and its decisions are in `CLAUDE.md`.
 
-## State right now
+## Latest (2026-11-10): brainstorming the clip mounting
+Process: `superpowers:brainstorming`, one question at a time; nothing gets built until Mike approves the written design.
+- **Done and built:** notchless stripe (x −25.5…22.2) and a black disc-slot filler, see `CLAUDE.md` Drive + Wrap rows.
+- **Decided, not built:** sleeve (plates overhang both ends by the slide distance), see `CLAUDE.md` Removal / sleeve row. Needs Job 1C.
+- **Waiting on Mike:** his review of the clip-strip proposal below, using the exploded sketch
+  `docs/mockups/explode/` (PNGs; `explode_spike.py` rebuilds it, throwaway). Question put to him: what's wrong or missing?
+- **Next after that:** write the design doc (`docs/superpowers/specs/2026-11-10-mounting-sleeve-design.md`): sleeve, channels,
+  latches, rebuilt hooks, re-check of the tile split and seam. A reviewer reads it before Mike.
+
+### Clip strips: proposal shown to Mike
+1. Dovetail channel on the plate's inner floor (part of the tile).
+2. Solid end stop on the side that takes the pull when the plate slides off, so removal load goes into plastic, not the latch.
+3. Thumb latch at the open end: a flex tab snaps over a ledge; press it and slide the strip out, no tools.
+4. Hooks rebuilt as clean parametric solids from our cross-sections (`analysis/section*.py`), same 18 positions; fewer, longer strips where hooks line up (Claude's call).
+5. ASA, printed upright, layers along the hook shafts; the tab bends across layers (Claude's call).
+6. Fit gate: coupons plus one strip in a channel on a plate offcut, test-locked before any full plate.
+Open risk: the stock plate flexes when you lift a corner, ours is a stiff tray. If the latches won't release with a slide alone, the release moves into the strip.
+
+## State before that (2026-11-02)
 Still mid-design on the plate edges, west/east ends and disc access. **Nothing is approved to build yet**: Mike must approve a written description first. Branch `handoff-end-panels` was merged into `main` and deleted.
 
 ## Decided 2026-11-02 (recorded in `CLAUDE.md`)
@@ -48,7 +66,7 @@ The semi-open walls are still in `cad/slab.py` (`END_FLAT`, `END_DISC`, `end_wal
 3. Use cadgen as `cadgen +0.8.4`, the installed version.
 
 ## Side items
-- Job 1B is still unmeasured and could change plate spacing by up to 8 mm.
+- Job 1B: the 2026-11-09 research makes 114 the working spacing; only a fan-end confirmation is left. Rear ports (X-ray, Job 1D): notches were drafted and then dropped (2026-11-10). The stripe's disc-side edge moved to −25.5 instead, so plugs clear it and the disc slot sits inside the stripe in a black filler; one HDMI reading checks the clearance. Job 1C is on hold. **Next topic: clip mounting** (slide-in strips: how they hold the console's original slots and how they mount in the plate).
 - That model's creator and licence are still unconfirmed, because Cloudflare blocked curl and Mike saved the files rather than the page.
 
 ## Video reference: devynPC "BoxPlates" (reviewed 2026-11-02)
@@ -75,7 +93,7 @@ Devyn Johnston, https://youtu.be/yilU2dU2YgA (4:50, 20 Jan 2025). This is the fi
 
 ## Wrap-around mockup (2026-11-02)
 Mike pointed to the 1:05 sketch in video 2: plates as level, constant-height lips with a constant black stripe between them, and the same treatment on the west and east ends. The colour inserts move to the **face**. Drawing: `docs/mockups/wrap_views.png`, made with `python3 -I docs/mockups/wrap_mockup.py <out.png>`.
-- Stripe 40 mm, centred on the core (x −17.8…22.2), which is the core's narrowest front width. Each lip comes out at 39.5 mm, so the front reads as thirds.
+- Stripe 40 mm, centred on the core (x −17.8…22.2), which is the core's narrowest front width. Each lip comes out at 39.5 mm, so the front reads as thirds. **Superseded 2026-11-10:** stripe x −25.5…22.2 (~48 mm), lips 39.5 / ~32, see `CLAUDE.md` Wrap row.
 - Face: vents on both lips at the fan (W) end. The south lip runs level over the drive (z 0…135), and the drive sits behind it with a disc slot hole like the stock faceplate (Mike, 2026-11-02; replaces the swoop). In the core proxy the drive is x −50.8…−17.8, inside the lip, and flush with the core face at y 127.5. The colour inserts sit on the north lip at the E end.
 - Back: the lips cover the exhaust, so they are vented end to end. **Port positions are not measured**, and the lips need cut-outs there.
 - Ends: both end walls are fully vented (option D), with the same stripe.

@@ -18,7 +18,7 @@ True-scale views in mm. Seen from the front, the drive end is on the left.
 
 ## Design
 - **Horizontal only, disc side down.** The console stands level on four TPU feet.
-- **Wrap-around plates.** Two flat plates (north and south) wrap the console with **level lips** on the face, back and both ends. A **constant 40 mm black stripe** of the console body stays visible all round, which hides the stock curves.
+- **Wrap-around plates.** Two flat plates (north and south) wrap the console with **level lips** on the face, back and both ends. A **constant ~48 mm black stripe** of the console body stays visible all round, which hides the stock curves.
 - **Separate lip strips.** The lips are printed as their own strips and welded to the plate edge, so the plate tiles stay 255 mm deep and fit a 256 mm print bed.
 - **Disc drive behind the lip.** The drive sits behind the level south lip, like on the stock faceplate. The disc slot's size and position are taken from a scan of the stock plate: about 122.5 × 5 mm.
 - **Honeycomb vents everywhere.** 6 mm hexagonal holes with 1.2 mm webs, ~69 % open: the fan grilles on both plates, the face lips at the fan end, the back lips along their full length (they cover the exhaust), and both end walls.

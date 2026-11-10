@@ -20,16 +20,17 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Front / rear | Open – plates never cover I/O, disc slot or rear exhaust |
 | Short ends | **Direction: option D** (2026-11-02) — no separate mesh panels; the plates' own end walls carry vent slots that wrap the corners from the fan grille (BoxPlates idea, adapted for FDM). Our own pattern, not Devyn's line pattern. Wall shape/slot details still to brainstorm, see `HANDOFF.md`. Semi-open walls in `slab.py` are rejected |
 | Edges | Straight edges. Gaps as invisible as possible → skirt edges are straight but follow the core twist (4 mm reveal) |
-| Drive (2026-11-02) | Drive sits **behind the level south face lip**, like the stock faceplate; the lip has a **disc slot** copied from the stock disc-plate scan (see `HANDOFF.md`, Disc slot). Replaces the old notch and the swoop idea |
+| Drive (2026-11-02) | Drive sits **behind the level south face lip**, like the stock faceplate; the disc slot (copied from the stock disc-plate scan, see `HANDOFF.md`) now sits **inside the black stripe**, in a **black filler** at the front drive end that also guides the disc back to the drive entry (y≈111). Filler printed with the south face lip via the AMS (fallback: welded) (2026-11-10). Replaces the old notch, the swoop idea and the slot hole in the lip |
 | Fan | 120 mm double-sided intake (Sony teardown + iFixit photo confirm openings both sides) → grille on **both** plates |
 | Accent | Four-colour decorative inserts (red/yellow/green/blue), no lighting. No Sony logo/trademark |
 | Colour | Plates PS1-style grey (#c6c4be); core is the console's own black |
-| Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Channel/retention design not done; shelves v2 hook geometry is the starting point |
+| Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Clip strips come out **by hand** (Mike, 2026-11-10). Proposal awaiting Mike's review (`HANDOFF.md`, Clip strips): dovetail channel, solid end stop on the removal-pull side, thumb latch at the open end. Shelves v2 hook geometry is the starting point |
 | Assembly | Weld tiles on the bench (only solvent step, never near the console) → slide clip strips in → fit to console |
 | Feet | TPU, ~12 mm, on the bottom plate (bottom fan grille must breathe) |
-| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant 40 mm black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end (honeycomb, see Grille), plus port cut-outs (TODO Job 1D); south face lip runs level over the drive with a disc slot hole |
+| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end (honeycomb, see Grille), no notches or holes anywhere (Mike, 2026-11-10: "no breakup lines"). Stripe x −25.5…+22.2 (~48 mm; `wrap.py` `STRIPE`): the disc-side edge sits at the disc slot's outer edge, so rear plug heads clear it and the slot lies inside the stripe. Lips: north 39.5, south ~32 |
 | North top (2026-11-02) | Single grey, engraved 0.4 mm only (no colour inlay, keeps PS1 calm). The tile seam is a **faceted panel line**: z 164 behind y −70, a 45° jog, then z 158. One path clears every clip of **both** plates by ≥3 mm, and it continues as the split groove on the face lips (158) and back lips (164). The fan grille stays honeycomb inside a **chamfered square panel line** (124 mm, 14 mm chamfers), so it doesn't read as a round fan. Markings in Hack mono: `[MONOLITH] U-05` at the front corner of the drive end, `INTAKE` plus 8 ticks by the panel. Style cue: the Xbox One X Cyberpunk 2077 controller's split line and bracketed text, with no CDPR or Microsoft art copied |
 | Lip strip length | Face and back strips (381 mm) don't fit the bed, so they split at the seam z. End strips (261 mm) fit diagonally at ~25° |
+| Removal / sleeve (2026-11-10) | Disassembly **as close to OEM as possible, sturdy, no glue**: lift the corner, slide, off. The end lips would block the slide (the plates slide in opposite directions), so both plates **overhang both ends by the slide distance + 0.5 mm** (a sleeve; the black end faces sit recessed in a grey frame). Needs TODO Job 1C; placeholder 25 mm. Not built yet |
 | Accent placement | Colour inserts on the **north face lip** (seen from the working orientation), not on the plate top |
 
 ## Printing constraints
@@ -59,6 +60,13 @@ Not in the public repo, local only and gitignored: `sources/ps5-cover-standard-e
   predicts ~102 mm at top end vs Sony spec 104 → consistent within 2 mm.
 - Fan: at the top end, ~13 cm from rear (photo) / 132 mm from rear, 76 mm from top (X-ray).
 - Lying on a table, book on top: 96 mm disc bump up, 95 mm disc bump down. **Spacing unresolved:** the scan says the console tilts ~2.5° lying down, so these imply ~106 mm if the book found the true top, but 114 mm fits the 95 mm drive-end reading and Sony's 104 mm. TODO.md Job 1B settles it (S=114 predicts 102 fan end / 95 drive end; S=106 predicts 94 / 87).
+  **2026-11-09: S=114 adopted as working value** (`docs/research/`): Sony 104, game8bit tape ~103 (CFI-1100A01), and the
+  95 drive-end reading all fit 114; 106 would sit ~10 mm under every real reading. Job 1B now only asks for the fan-end
+  reading as a confirmation (102–104 confirms, ~94 overturns). If wrong, the error is cosmetic (stripe ~8 mm narrower).
+- Rear port positions along z (X-ray, ±4 mm, from the drive end): power 30–44, HDMI 71–85, LAN 106–123, USB 131–145 and 155–169.
+  Front: USB-C 166–176, USB-A 183–197. Openings sit inside the stripe, ~2 mm from its disc-side edge; plug heads
+  overlap −17.8 by ~1–3 mm (photo estimate, ±3–4 mm), hence the stripe edge at −25.5. Plan for ±1.5 mm port variation between CFI-10xx/11xx/12xx.
+- Plate slide distance: not derivable from any source (no published value). Deferred until the clip strips need it.
 
 ## Coordinate frames
 **Scan-local** (per panel, origin = panel bbox min): X across the panel, Y depth (0 = rear, +Y front),
@@ -118,7 +126,8 @@ tools/              requirements.txt, shelf_groups.json, run_shelves.sh, make_po
   → convert with mesh2step.py.
 
 ## Open items (next session)
-1. **Mike: TODO.md Job 1B** settles the glue-plane spacing. If it changes, update P_FLAT/P_DISC in `cad/slab.py`, `analysis/core_proxy.py`, `analysis/core_proxy2.py` and `tools/place_shelves.py`, then rebuild.
+1. **Mike: TODO.md Job 1B** (fan end only) confirms the glue-plane spacing of 114. Job 1D (one HDMI reading) checks
+   that rear plug heads clear the stripe edge at −25.5. If the spacing changes, update P_FLAT/P_DISC in `cad/slab.py`, `analysis/core_proxy.py`, `analysis/core_proxy2.py` and `tools/place_shelves.py`, then rebuild.
 2. Printable set, after item 1 and the end-wall design: slide-in clip channels, stepped seam near z≈158, inserts (0.6 mm, 14 × 2.5), TPU feet, export STL/3MF/STEP.
 3. Grille still has small bites where it meets the shelf pads. Accept them or move the pads.
 4. Skirt tab: `plate()` now gives one solid per plate and no separate tab was found; confirm by eye, then close.

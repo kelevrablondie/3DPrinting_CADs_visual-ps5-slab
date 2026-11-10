@@ -47,6 +47,8 @@ We have two answers and only one can be right: 104 mm or 114 mm. Let's find out!
 
 Job 1 was Claude's mistake, not yours. The PS5 tips a little when it lies down, so that test couldn't give a clear answer. This one can.
 
+**Update 2026-11-09:** the research (Sony's 104 mm, a Japanese owner's ~103 mm, and your 95 mm at the drive end) points strongly to the model being right, so the model now uses that answer. Your drive-end number is already done (95 mm). Only the fan end is left. It's a check, not a blocker.
+
 **You need:** tape measure and two hard books.
 
 - [ ] Stand the PS5 up in its normal upright position, with the disc drive at the bottom. Hold it steady so it can't fall.
@@ -55,20 +57,18 @@ Job 1 was Claude's mistake, not yours. The PS5 tips a little when it lies down, 
 
 **Fan end:** ______ mm
 
-- [ ] Do the same thing **7 cm up from the bottom edge** (the drive end).
-
-**Drive end:** ______ mm
+**Drive end:** 95 mm (already measured)
 
 **What does it mean?**
-- About **102** and **95**: the model is right. Hooray!
-- About **94** and **87**: the model is too fat, and Claude will fix it.
-- Something else: tell Claude the numbers anyway.
+- About **102–104**: the model is right. Hooray!
+- About **94**: the model is too fat, and Claude will fix it.
+- Something else: tell Claude the number anyway.
 
 ---
 
-## Job 1C: How far does the plate slide?
+## Job 1C: How far does the plate slide? (needed now)
 
-This tells Claude how much room the ends need. The end design is changing, so this may or may not end up mattering, but it only takes a minute.
+The new plates overhang both ends by exactly this distance, so they can slide off the way the stock ones do. Nobody has published this number, so only your tape can answer it. Do it **3 times on each plate** (top and bottom), and write down the biggest number.
 
 **You need:** tape measure, a small piece of sticky tape, and a pen.
 
@@ -82,6 +82,10 @@ This tells Claude how much room the ends need. The end design is changing, so th
 
 **Slide distance:** ______ mm
 
+- [ ] While the plate is off: measure how long one of the plate's hooks is, and how long the slot it goes into on the black part is.
+
+**Hook length:** ______ mm   **Slot length:** ______ mm
+
 - [ ] Put the plate back until it clicks, and peel off the tape.
 
 ---
@@ -90,31 +94,19 @@ This tells Claude how much room the ends need. The end design is changing, so th
 
 The new plates have edges that cover part of the black middle. Claude needs to know where every plug and button is, so the edges get holes in the right places.
 
-**You need:** tape measure, a pen, and a flat table.
+**Update 2026-11-09:** Claude read most of this from an X-ray of the PS5, so the big table is gone. All the plugs sit inside the black stripe. Some plug heads poke a little past the old stripe on the **bottom** side, so the stripe was made wider on that side (no notches). One measurement checks that the plugs clear it.
+
+From the X-ray (±4 mm, measured from the drive end): Power 30–44, HDMI 71–85, LAN 106–123, USB 131–145 and 155–169. On the front, USB-C is at 166–176 and USB-A at 183–197. The front buttons sit inside the stripe, so they don't need holes. The black part at the back is already measured: 80 mm at the drive end and 45 mm at the fan end.
+
+**You need:** tape measure and a flat table.
 
 - [ ] Turn the PS5 all the way off and pull out every cable.
 - [ ] Lay the PS5 down with the **disc bump facing down**, the way it will sit with the new plates.
-- [ ] Look at the **back**. For each plug in the table, measure two things:
-  - **From the drive end:** from the drive end of the black part to the near edge and to the far edge of the plug.
-  - **Up from the table:** from the table to the bottom edge and to the top edge of the plug.
-- [ ] Do the same on the **front** for the USB plugs, the two buttons and the disc slot.
+- [ ] At the **back**, find the HDMI port. Measure from the **bottom edge of the HDMI port** down to the **bottom edge of the black part**, where the black meets the white plate.
 
-| Where | Plug or button | From drive end: near / far (mm) | Up from table: bottom / top (mm) |
-|---|---|---|---|
-| Back | Power | ___ / ___ | ___ / ___ |
-| Back | HDMI | ___ / ___ | ___ / ___ |
-| Back | Network (LAN) | ___ / ___ | ___ / ___ |
-| Back | USB 1 | ___ / ___ | ___ / ___ |
-| Back | USB 2 | ___ / ___ | ___ / ___ |
-| Front | USB-A | ___ / ___ | ___ / ___ |
-| Front | USB-C | ___ / ___ | ___ / ___ |
-| Front | Power button | ___ / ___ | ___ / ___ |
-| Front | Eject button | ___ / ___ | ___ / ___ |
-| Front | Disc slot (the opening, not the whole drive). Claude has this from the scan; it's only a check | ___ / ___ | ___ / ___ |
+**HDMI bottom edge to black bottom edge:** ______ mm
 
-- [ ] One more: at the **back**, measure how tall the black part is (table side to top side) at the drive end and at the fan end.
-
-**Black part at the back, drive end:** ______ mm   **Fan end:** ______ mm
+- [ ] If you like: plug in the HDMI cable and check whether its plug head sticks out past the black onto the white plate. **Plug head on the white?** yes / no
 
 ---
 
@@ -193,9 +185,9 @@ A bigger bed means less squeezing for question 2. If you don't know yet, write "
 
 - [X] Give Claude your two numbers from Job 1.
 - [X] Give Claude your picks from Job 3.
-- [ ] Give Claude your two numbers from Job 1B.
-- [ ] Give Claude your slide distance from Job 1C.
-- [ ] Give Claude your table from Job 1D.
+- [ ] Give Claude your fan-end number from Job 1B.
+- [ ] Give Claude your slide distance (both plates) and hook/slot lengths from Job 1C.
+- [ ] Give Claude your HDMI number from Job 1D.
 
 Claude finishes the computer work after that. You're done until you have a printer!
 

@@ -10,8 +10,10 @@ from matplotlib.patches import Rectangle, Polygon, RegularPolygon
 PLATE, CORE, DRIVE, VENT, BG = "#c6c4be", "#1d1d1f", "#dcdcd8", "#55555a", "#f4f5f7"
 ACCENT = ["#d8343a", "#e8b923", "#2fa58f", "#3b6fc4"]
 TOP, BOT = 59.2 + 2.5, -54.8 - 2.5      # outer plate surfaces (x)
-C, BAND = 2.2, 40.0                      # stripe centred on the core, = narrowest core face (front, drive end)
-B_HI, B_LO = C + BAND / 2, C - BAND / 2  # 22.2, -17.8 -> lips 39.5 mm each
+C = 2.2
+# stripe: north edge 20 above the core centre; south edge at the disc slot so plugs need no notches
+B_HI, B_LO = C + 20.0, -25.5            # -> ~48 mm stripe, north lip 39.5, south lip ~32
+BAND = B_HI - B_LO
 L0, L1 = -2.0, 382.0                     # plate span along the length (core 0..380)
 D = 255.0
 
@@ -46,16 +48,16 @@ def face(ax):
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)               # both lips level, end to end
     # drive (z 0..135) sits behind the south lip, like the stock plate; dashed = hidden
-    ax.add_patch(Rectangle((380 - 135, -50.8), 135, -17.8 + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
+    ax.add_patch(Rectangle((380 - 135, -50.8), 135, B_LO + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
     # disc slot from the stock disc plate scan: z' 22.5..145, straight disc path x' -25.5..-20.5
-    ax.add_patch(Rectangle((380 - 145, -25.5), 145 - 22.5, 5, fc=CORE, ec="#444", lw=0.4))
+    ax.add_patch(Rectangle((380 - 145, -25.5), 145 - 22.5, 5, fc="#000", ec="#555", lw=0.4))   # inside the stripe, black filler around it
     honeycomb(ax, L0, 120, B_HI, TOP); honeycomb(ax, L0, 120, BOT, B_LO)
     for i, col in enumerate(ACCENT):                                      # 4 inserts, 2.5 x 14 each
         ax.add_patch(Rectangle((338 + i * 4, C + BAND / 2 + 39.5 / 2 - 7), 2.5, 14, fc=col, lw=0))
     ax.text(312, -40, "drive behind the lip (dashed)", ha="center", fontsize=6.5)
-    ax.text(296, -32, "disc slot 122.5 x 5, from stock plate scan", ha="center", fontsize=6.5)
-    ax.text(250, 40, "north lip 39.5", fontsize=7); ax.text(150, 0, "black stripe 40, constant", color="w", fontsize=7)
-    ax.text(150, -40, "south lip 39.5", fontsize=7)
+    ax.text(296, -32, "disc slot in the stripe (black filler), 122.5 x 5", ha="center", fontsize=6.5)
+    ax.text(250, 40, "north lip 39.5", fontsize=7); ax.text(150, 0, "black stripe ~48, constant", color="w", fontsize=7)
+    ax.text(150, -40, "south lip ~32", fontsize=7)
     ax.text(345, 66, "colour inserts", fontsize=6.5, ha="center")
 
 
@@ -66,8 +68,7 @@ def back(ax):
     ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
     lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)
     honeycomb(ax, L0, L1, B_HI, TOP); honeycomb(ax, L0, L1, BOT, B_LO)
-    ax.add_patch(Rectangle((0, -37.8), 100, 80, fill=False, ec="#d8343a", lw=1.2, ls="--"))
-    ax.text(50, 66, "ports: positions not measured", color="#d8343a", fontsize=7, ha="center")
+    ax.text(100, 0, "plugs fit inside the stripe: no notches", color="w", fontsize=7, ha="center")
 
 
 def end(ax, title, front_right):
