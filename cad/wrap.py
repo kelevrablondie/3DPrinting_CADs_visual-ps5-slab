@@ -2,8 +2,9 @@
 Level lips + constant ~48 mm black stripe on face, back and both ends (docs/mockups/wrap_views.png).
 Console frame (standing) as slab.py: X width (+X flat/north, -X disc/south), Y depth (+Y front), Z length (0 = drive end).
 Not designed yet, shown as placeholders: slide-in clip strips (old glued shelves stand in), stepped seam.
-The black stripe is widened on the disc side so rear plugs fit without notches and the disc slot
-sits inside it; a black filler at the front drive end carries the slot back to the drive entry."""
+The black stripe is widened on the disc side so rear plugs fit without notches, except on the face: there the south
+lip covers the core out to its narrowest face edge (no filler seam), the disc slot is cut through the lip and a
+hidden guide welded into it carries the slot back to the drive entry."""
 import build123d as bd
 from cadgen import model
 from slab import (P_FLAT, P_DISC, C, CORE_L, FLOOR, ACCENT, COL_PLATE, COL_SHELF, COL_FOOT, COL_CORE,
@@ -24,6 +25,12 @@ ENGRAVE, GROOVE = 0.4, 1.0                   # engraving depth, panel-line width
 # tile seam as a faceted panel line (y, z): clears every clip of BOTH plates by >= 3 mm
 SEAM = [(-YF - 3, 164.0), (-70.0, 164.0), (-64.0, 158.0), (YF + 3, 158.0)]
 PANEL_H, PANEL_C = 62.0, 14.0                # fan panel: half size, corner chamfer (hides the round fan)
+# slide-in clip strips: the scanned hook shelves keep their hooks; their base becomes a dovetail tongue in rails on
+# the plate floor. Plates slide off along z (flat +z, disc -z, as slab.py's end-wall check): the end stop takes that pull.
+RAIL_W, RAIL_H, DOVE = 4.0, 4.0, 1.5        # rail width, height, dovetail overhang into the channel
+FIT = 0.2                                   # strip-to-rail sliding clearance
+STOP, LEDGE, PAD = 4.0, 3.0, 4.0            # end stop thickness, latch ledge length, thumb pad length
+COL_STRIP = "#8c8c8c"
 FONT = "/usr/share/fonts/source-foundry-hack-fonts/Hack-Regular.ttf"
 NAME = "[MONOLITH] U-05"
 # shortcut: clip footprints (y0, y1, z0, z1) copied from cad/core/shelf_*_c.stl bounds; regenerate when the
@@ -104,21 +111,51 @@ def top_text(txt, size, y_base, z_start, x_top):
     return solid
 
 
-def filler(y_out):
-    """black filler in the stripe at the front drive end, where the core face (tape loft) is narrower than the stripe.
-    It doubles as the disc guide: the slot runs through it back to the drive entry. Print it with the south face lip
-    in black via the AMS (fallback: separate part, welded)."""
+def filler(y_in):
+    """hidden filler behind the south face lip at the drive end, where the core face (tape loft) is narrower than the
+    stripe. It is the disc guide: the slot runs through it back to the drive entry. Printed as one with the face lip."""
     x0 = STRIPE[0]
     core_edge = lambda z: C - (WF0 + (WF1 - WF0) * z / CORE_L) / 2         # disc-side core face edge
     z_end = (C - x0) * 2 - WF0                                             # where the face reaches the stripe edge
     z_end = z_end * CORE_L / (WF1 - WF0)
     tri = [(x0, Z0), (core_edge(Z0), Z0), (x0, z_end)]
     face = bd.Face(bd.Wire.make_polygon([bd.Vector(x, SLOT_Y, z) for x, z in tri], close=True))
-    f = bd.extrude(face, amount=y_out - SLOT_Y, dir=(0, 1, 0))
+    f = bd.extrude(face, amount=y_in - SLOT_Y, dir=(0, 1, 0))
     f += box(x0 - GUIDE, x0, SLOT_Y, YF + CLR, *SLOT_Z)                   # slot floor behind the lip
-    f -= box(*SLOT_X, SLOT_Y - 1, y_out + 1, *SLOT_Z)
-    f.color, f.label = COL_CORE, "filler_drive"
-    return f
+    return f - box(*SLOT_X, SLOT_Y - 1, y_in + 1, *SLOT_Z)
+
+
+def clip_strip(shelf, side):
+    """(plate features, strip) for one scanned hook shelf. Rails, end stop and latch ledge are plate (one with the
+    tile); the strip is the shelf minus them, so its base comes out as the matching dovetail tongue."""
+    b = shelf.bounding_box()
+    y0, y1, z0, z1 = b.min.Y, b.max.Y, b.min.Z, b.max.Z
+    x_fl = side * P_FLAT if side > 0 else side * P_DISC                # floor inner face
+    xr = lambda d: x_fl - side * d                                     # d mm up from the floor, toward the core
+    def rail(y_edge, inward, grow=0.0):                                # dovetail rail profile in (y, x), along z
+        w, o = RAIL_W + grow, DOVE + grow
+        pts = [(y_edge, 0), (y_edge + inward * w, 0), (y_edge + inward * (w + o), RAIL_H + grow),
+               (y_edge, RAIL_H + grow)]
+        f = bd.Face(bd.Wire.make_polygon([bd.Vector(xr(d), y, z0 - 1) for y, d in pts], close=True))
+        return bd.extrude(f, amount=z1 - z0 + 2, dir=(0, 0, 1))
+    # stop at the end the console pulls the strip toward when the plate slides off; latch at the open end
+    zs, zo = (z0, z1) if side > 0 else (z1, z0)
+    sgn = 1 if zo > zs else -1                                         # stop -> open direction
+    stop = box(*sorted((xr(0), xr(RAIL_H))), y0, y1, *sorted((zs, zs - sgn * STOP)))
+    ledge = box(*sorted((xr(0), xr(1.5))), y0 + RAIL_W + DOVE, y1 - RAIL_W - DOVE,
+                *sorted((zo - sgn * 6, zo - sgn * (6 - LEDGE))))
+    plate_bits = rail(y0, +1) + rail(y1, -1) + stop + ledge
+    cut = rail(y0, +1, FIT) + rail(y1, -1, FIT) + box(*sorted((xr(-1), xr(1.5 + FIT))),
+                                                      y0 + RAIL_W + DOVE, y1 - RAIL_W - DOVE,
+                                                      *sorted((zo - sgn * (6 + FIT), zo - sgn * (6 - LEDGE - FIT))))
+    cut += box(*sorted((x_fl, x_fl + side * 5)), y0 - 1, y1 + 1, z0 - 1, z1 + 1)   # old 0.8 glue pocket: sit on the floor
+    strip = (bd.Solid(shelf) if isinstance(shelf, bd.Shell) else shelf) - cut   # mesh STEP reads as a shell
+    assert strip.volume > 0.5 * bd.Solid(shelf).volume, shelf.label
+    # shortcut: thumb pad only marks the latch; the flex arm is not modelled. Model it with the hook rebuild
+    strip = strip + box(*sorted((xr(1.6), xr(4.0))), y0 + RAIL_W + DOVE, y1 - RAIL_W - DOVE,
+                        *sorted((zo, zo + sgn * PAD)))
+    strip.color, strip.label = COL_STRIP, "clip_strip_" + shelf.label[6:]
+    return plate_bits, strip
 
 
 def plate_set(side):
@@ -150,20 +187,34 @@ def plate_set(side):
         for k in range(8):                                             # tick row left of INTAKE
             z = FAN_Z - 40 + 3 * k
             floor = floor - box(x_top - ENGRAVE, x_top + 0.01, FAN_Y + PANEL_H + 7, FAN_Y + PANEL_H + 11, z - 0.4, z + 0.4)
+    strips = [k for k in internals() if k.label.startswith(f"shelf_{name}_")]
+    built = [clip_strip(k, side) for k in strips]
+    for i, (plate_bits, strip) in enumerate(built):
+        for j, (_, other) in enumerate(built):                         # overlapping footprints: neighbours win
+            if j != i:
+                plate_bits = plate_bits - other
+        floor = floor + plate_bits
+        parts.append(strip)
     floor.color, floor.label = COL_PLATE, f"plate_{name}"
     parts.append(floor)
 
     # face / back lip strips: wall in front of the core face, 0.5 tab up to the floor edge for the weld
     for ys, tag in ((+1, "face"), (-1, "back")):
         y_in, y_out = ys * (YF + CLR), ys * (YF + CLR + LIP)
-        wall = box(lo, hi, y_in, y_out, Z0, Z1) + box(*fl, ys * YF, y_in, Z0, Z1)
+        # south face lip covers the core out to its narrowest face edge, so the black seen there is core only
+        hi_w = C - WF0 / 2 if (tag == "face" and side < 0) else hi
+        wall = box(lo, hi_w, y_in, y_out, Z0, Z1) + box(*fl, ys * YF, y_in, Z0, Z1)
+        if tag == "face" and side < 0:                                     # disc slot through the lip + guide
+            wall = wall + filler(y_in) - box(*SLOT_X, y_in - 1, y_out + 1, *SLOT_Z)
+            for z0, z1 in ((Z0 - LIP, Z0), (Z1, Z1 + LIP)):               # square corners over the end lips
+                wall = wall + box(hi, hi_w, y_in, y_out, z0, z1)
         if tag == "back":
             vent = hex_grid(Z0, Z1, lo, hi)                                # exhaust: vented end to end
         else:
             vent = hex_grid(CORE_L - 120, Z1, lo, hi)                      # fan end only
         wall = wall - holes("y", LIP + 2, (y_in + y_out) / 2, vent)
         zs = SEAM[-1][1] if ys > 0 else SEAM[0][1]                      # lip split line continues the seam
-        wall = wall - box(lo, hi, y_out - ys * ENGRAVE, y_out + ys * 0.01, zs - GROOVE / 2, zs + GROOVE / 2)
+        wall = wall - box(lo, hi_w, y_out - ys * ENGRAVE, y_out + ys * 0.01, zs - GROOVE / 2, zs + GROOVE / 2)
         extras = []
         if tag == "face" and side > 0:                                     # colour inserts, seen from the sofa
             xc = (lo + hi) / 2
@@ -175,8 +226,6 @@ def plate_set(side):
                 extras.append(ins)
         wall.color, wall.label = COL_LIP, f"lip_{tag}_{name}"
         parts += [wall] + extras
-        if tag == "face" and side < 0:
-            parts.append(filler(y_out))
 
     # end lip strips: wrap the short ends and the lip corners, fully vented
     yo = YF + CLR + LIP
@@ -198,11 +247,7 @@ def plate_set(side):
 
 def assembly(lying=True):
     kids = plate_set(+1) + plate_set(-1)
-    for k in internals():
-        if k.label.startswith("shelf_"):
-            k.label = "clip_placeholder_" + k.label[6:]                    # slide-in strips not designed yet
-            k.color = COL_SHELF
-        kids.append(k)
+    kids += [k for k in internals() if not k.label.startswith("shelf_")]   # shelves now live in the clip strips
     a = bd.Compound(children=kids, label="ps5_wrap_draft")
     return bd.Rot(0, -90, 0) * a if lying else a
 

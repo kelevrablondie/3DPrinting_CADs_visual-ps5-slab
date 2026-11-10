@@ -48,7 +48,9 @@ To refresh the interactive STL after a change: `cadgen +0.8.4 export <id> docs/m
 |---|---|
 | `cad/` | CAD models (`wrap.py` current, `slab.py` earlier), console proxies, renders |
 | `analysis/` | Scan analysis: heightmaps, clip detection, sections, shelf generator |
-| `deliverables/` | Fit-test coupons, shelves v2 (glued concept) |
+| `deliverables/` | Fit tests to print first (`fit_tests/`, Bambu Studio–ready .3mf) and the hook coupons |
+| `archive/` | Declined designs, kept for reference |
+| `CHANGELOG.md` | Progress log |
 | `docs/mockups/` | 2D design mockups |
 | `docs/model/` | Exported draft STL (interactive on GitHub) |
 | `sources/` | Third-party scans and reference images (their own licences) |

@@ -33,13 +33,7 @@ def explode_overall():
             if p.label.startswith("foot"):
                 continue
             q = bd.Pos(dx, 0, 0) * p; q.color, q.label = p.color, p.label; kids.append(q)
-    for k in wrap.internals():
-        if k.label.startswith("shelf_"):                         # clip strips: halfway out
-            dx = 95 if ("flat" in k.label) else -45
-            q = bd.Pos(dx, 0, 0) * k; q.color, q.label = STRIP, "clip_strip_" + k.label[6:]
-        else:
-            q = k
-        kids.append(q)
+    kids += [k for k in wrap.internals() if not k.label.startswith("shelf_")]   # clip strips ride with their plates
     return bd.Rot(0, -90, 0) * bd.Compound(children=kids, label="exploded_overall")
 
 

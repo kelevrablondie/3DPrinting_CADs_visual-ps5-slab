@@ -197,8 +197,11 @@ Claude finishes the computer work after that. You're done until you have a print
 
 Don't do these yet.
 
-- [ ] Print the two small test pieces, and check that they click onto the PS5 and lock.
-- [ ] Print the partial test piece: a narrow strip of plate with only the clips at its ends. Click it onto the PS5 and put a spirit level on it. If it isn't level or a clip misses, tell Claude before printing anything bigger.
+**Print these first, in this order.** They're in `deliverables/fit_tests/`. Open each `.3mf` in Bambu Studio (File → Import), slice, print. ASA, textured PEI.
+
+- [ ] `1_coupon_F11_small_corner.3mf` and `2_coupon_F5_large_spring.3mf`: the two small test pieces. Check that they click onto the PS5 and lock. In Bambu Studio, use "Lay on face" so the flat back sits on the bed.
+- [ ] `3_fit_strip_offcut.3mf`: one clip strip and a piece of plate with its channel, already laid out for printing. Turn on supports (tree, "on build plate only"): the strip has a small shelf over its slide groove. Slide the strip into the channel from the open end until it hits the stop and the ledge catches. Then click it onto the PS5. If it's too tight, too loose, or the hook misses, tell Claude.
+- [ ] Then the partial test piece (not drawn yet): a narrow strip of plate with only the clips at its ends. Click it onto the PS5 and put a spirit level on it. If it isn't level or a clip misses, tell Claude before printing anything bigger.
 - [ ] Print one plate and its clip strips. Slide the strips in and check they click onto the PS5. No glue needed for the clips.
 - [ ] Print the rest of the plates.
 - [ ] Join the two plate halves **on a table, far away from the PS5**. This is the only glue step.

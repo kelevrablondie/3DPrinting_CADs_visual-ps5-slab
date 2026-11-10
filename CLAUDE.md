@@ -20,14 +20,14 @@ disc drive, light bars are NOT covered). Style: minimalism, subtle touches, PS1 
 | Front / rear | Open – plates never cover I/O, disc slot or rear exhaust |
 | Short ends | **Direction: option D** (2026-11-02) — no separate mesh panels; the plates' own end walls carry vent slots that wrap the corners from the fan grille (BoxPlates idea, adapted for FDM). Our own pattern, not Devyn's line pattern. Wall shape/slot details still to brainstorm, see `HANDOFF.md`. Semi-open walls in `slab.py` are rejected |
 | Edges | Straight edges. Gaps as invisible as possible → skirt edges are straight but follow the core twist (4 mm reveal) |
-| Drive (2026-11-02) | Drive sits **behind the level south face lip**, like the stock faceplate; the disc slot (copied from the stock disc-plate scan, see `HANDOFF.md`) now sits **inside the black stripe**, in a **black filler** at the front drive end that also guides the disc back to the drive entry (y≈111). Filler printed with the south face lip via the AMS (fallback: welded) (2026-11-10). Replaces the old notch, the swoop idea and the slot hole in the lip |
+| Drive (2026-11-02) | Drive sits **behind the level south face lip**, like the stock faceplate; the disc slot (copied from the stock disc-plate scan, see `HANDOFF.md`) is cut **through the south face lip**, which now covers the core out to its narrowest face edge (x = −17.8, face stripe = 40 mm, no black filler seam); a hidden guide, printed as one with that lip, carries the disc back to the drive entry (y≈111) (2026-11-10, replaces the black-filler version). Replaces the old notch, the swoop idea and the slot hole in the lip |
 | Fan | 120 mm double-sided intake (Sony teardown + iFixit photo confirm openings both sides) → grille on **both** plates |
 | Accent | Four-colour decorative inserts (red/yellow/green/blue), no lighting. No Sony logo/trademark |
 | Colour | Plates PS1-style grey (#c6c4be); core is the console's own black |
-| Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Clip strips come out **by hand** (Mike, 2026-11-10). Proposal awaiting Mike's review (`HANDOFF.md`, Clip strips): dovetail channel, solid end stop on the removal-pull side, thumb latch at the open end. Shelves v2 hook geometry is the starting point |
+| Mounting | **Slide-in, replaceable clip strips** (2026-11-02, BoxPlates-style) that slot into channels on the plate inner wall/floor; no glue. Replaces glued shelves + 0.8 mm pockets. Clip strips come out **by hand** (Mike, 2026-11-10). **Approved and built 2026-11-10** in `wrap.py` (`clip_strip`): each scanned hook shelf becomes a strip whose base is a dovetail tongue (rails 4 × 4, 1.5 overhang, 0.2 fit) on the plate floor, solid end stop on the removal-pull side (flat −z, disc +z), latch ledge + thumb pad at the open end. Hooks keep their scanned positions; the 0.8 glue pocket is gone. `cad/check_clip_strips.py` checks fit, stop and latch. Still open from the proposal: hooks rebuilt as parametric solids + fewer longer strips, the latch's flex arm, the offcut fit gate |
 | Assembly | Weld tiles on the bench (only solvent step, never near the console) → slide clip strips in → fit to console |
 | Feet | TPU, ~12 mm, on the bottom plate (bottom fan grille must breathe) |
-| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end (honeycomb, see Grille), no notches or holes anywhere (Mike, 2026-11-10: "no breakup lines"). Stripe x −25.5…+22.2 (~48 mm; `wrap.py` `STRIPE`): the disc-side edge sits at the disc slot's outer edge, so rear plug heads clear it and the slot lies inside the stripe. Lips: north 39.5, south ~32 |
+| Wrap / lips (2026-11-02) | Plates wrap the core with **level lips and a constant black stripe** on face, back and both ends (devynPC 1:05 sketch; `docs/mockups/wrap_views.png`). Lips sit in front of the core face, so they are **separate lip strips welded to the plate edge**; the plate tiles stay 255 deep for the 256 bed. Face lips vented at the fan end; back lips vented end to end (honeycomb, see Grille), no notches or holes anywhere (Mike, 2026-11-10: "no breakup lines"). Stripe x −25.5…+22.2 (~48 mm; `wrap.py` `STRIPE`): the disc-side edge sits at the disc slot's outer edge, so rear plug heads clear it. Face side only: the south lip runs to −17.8 (face stripe 40 mm, slot through the lip, corners squared over the end lips; see Drive). Lips: north 39.5, south ~32 |
 | North top (2026-11-02) | Single grey, engraved 0.4 mm only (no colour inlay, keeps PS1 calm). The tile seam is a **faceted panel line**: z 164 behind y −70, a 45° jog, then z 158. One path clears every clip of **both** plates by ≥3 mm, and it continues as the split groove on the face lips (158) and back lips (164). The fan grille stays honeycomb inside a **chamfered square panel line** (124 mm, 14 mm chamfers), so it doesn't read as a round fan. Markings in Hack mono: `[MONOLITH] U-05` at the front corner of the drive end, `INTAKE` plus 8 ticks by the panel. Style cue: the Xbox One X Cyberpunk 2077 controller's split line and bracketed text, with no CDPR or Microsoft art copied |
 | Lip strip length | Face and back strips (381 mm) don't fit the bed, so they split at the seam z. End strips (261 mm) fit diagonally at ~25° |
 | Removal / sleeve (2026-11-10) | Disassembly **as close to OEM as possible, sturdy, no glue**: lift the corner, slide, off. The end lips would block the slide (the plates slide in opposite directions), so both plates **overhang both ends by the slide distance + 0.5 mm** (a sleeve; the black end faces sit recessed in a grey frame). Needs TODO Job 1C; placeholder 25 mm. Not built yet |
@@ -84,9 +84,9 @@ Horizontal model = standing model rotated `Rot(0, −90, 0)` (disc side down).
 - Plate outline L 384 × D 255, corner R 10, floor 2.5, skirt wall 2.5. Total width 119 mm (+12 mm feet), pending Job 1B.
 - Skirt edges: straight lines from (face width/2 + 4 mm) at z=0 to the same at z=380, front and rear separately;
   Disc-side front skirt removed over z 0…143 (drive notch).
-- End walls (rejected concept, remove with the redesign): straight edges `END_FLAT`, `END_DISC` from `analysis/end_edges.py`; `cad/check_end_walls.py` checks core clearance over a 25 mm slide.
+- End walls (rejected concept, still in `slab.py`): `END_FLAT`, `END_DISC`; their scripts are in `archive/`.
 - Grille: hex 3.4 mm holes, 5 mm pitch, R 55 around (y 3, z 305), holes skipped within 2.5 mm of shelf pockets.
-- Clip shelves v2 (`deliverables/ps5_clip_shelves_v2.zip`, also `analysis/shelf_*.stl`): 5 flat + 4 disc, 18 hooks
+- Clip shelves v2 (`analysis/shelf_*.stl`; the glued-shelf zip is in `archive/`; the clip strips are cut from these): 5 flat + 4 disc, 18 hooks
   (flat 11, disc 7), glue faces +0.8 mm for the pockets. Clip table: `analysis/clip_map.png`; groups: `tools/shelf_groups.json`.
 
 ## Files
@@ -96,17 +96,18 @@ analysis/           scan analysis scripts and outputs (heightmaps *.npz, clip/ed
   hmap.py           panel heightmaps -> {flat,disk}_hmap.npz          clips.py  clip detection
   section*.py       clip cross-sections                                edges.py  stock edge-wrap depth
   shelves.py        clip-shelf generator (run via tools/run_shelves.sh)
-  coupon.py         fit-test coupons                                   frame.py  (rejected) adapter-frame concept
+  coupon.py         fit-test coupons
   core_proxy*.py    core stand-in = space between plate inner surfaces ∩ measured face-width loft (+ drive box)
 cad/
   wrap.py           ★ current PRE-ALPHA draft: wrap-around plates, lip strips, honeycomb, disc slot (model: wrap_horizontal, ~50 s cold)
   slab.py           earlier skirt concept; wrap.py imports its constants and internals()
-  concepts.py, concept_d.py, concept_e.py   earlier rejected concepts (A/B/C, enclosed D, open E)
+  check_clip_strips.py  clip strips: fit at rest, end stop, latch ledge
   mesh2step.py      STL -> sewn STEP so meshes can be placed in cadgen models (read_step)
   pockets.json, grille.json                 generated by tools/make_pockets_grille.py
   core/             STEP/STL proxies (core_final, drive_proxy, shelves in console frame)
   renders/          latest renders (hero_front/rear, ortho_front_rear, inside)
-deliverables/       shelves v2 zip, fit-test coupons, adapter concept (rejected)
+deliverables/       fit-test coupons
+archive/            declined designs (concepts A–E, end walls, adapter frame, glued shelves), see archive/README.md
 tools/              requirements.txt, shelf_groups.json, run_shelves.sh, make_pockets_grille.py, place_shelves.py
 ```
 
