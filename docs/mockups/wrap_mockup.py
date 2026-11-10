@@ -14,6 +14,7 @@ C = 2.2
 # stripe: north edge 20 above the core centre; south edge at the disc slot so plugs need no notches
 B_HI, B_LO = C + 20.0, -25.5            # -> ~48 mm stripe, north lip 39.5, south lip ~32
 BAND = B_HI - B_LO
+B_FACE = C - 20.0                        # face only: south lip runs to the core's narrowest face edge (40 mm stripe)
 L0, L1 = -2.0, 382.0                     # plate span along the length (core 0..380)
 D = 255.0
 
@@ -45,19 +46,19 @@ def face(ax):
     """you looking at the front: W (fan) left, E (drive) right. u = 380 - z"""
     frame(ax, "FACE (working view): E drive end left, W fan end right", 384)
     ax.invert_xaxis()                                                     # trust the scan-based model: drive end on the left
-    ax.add_patch(Rectangle((L0, B_LO), L1 - L0, BAND, fc=CORE))
-    lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_LO)               # both lips level, end to end
+    ax.add_patch(Rectangle((L0, B_FACE), L1 - L0, B_HI - B_FACE, fc=CORE))
+    lip(ax, L0, L1, B_HI, TOP); lip(ax, L0, L1, BOT, B_FACE)             # both lips level, end to end
     # drive (z 0..135) sits behind the south lip, like the stock plate; dashed = hidden
-    ax.add_patch(Rectangle((380 - 135, -50.8), 135, B_LO + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
+    ax.add_patch(Rectangle((380 - 135, -50.8), 135, B_FACE + 50.8, fill=False, ec="#777", lw=0.8, ls="--"))
     # disc slot from the stock disc plate scan: z' 22.5..145, straight disc path x' -25.5..-20.5
-    ax.add_patch(Rectangle((380 - 145, -25.5), 145 - 22.5, 5, fc="#000", ec="#555", lw=0.4))   # inside the stripe, black filler around it
-    honeycomb(ax, L0, 120, B_HI, TOP); honeycomb(ax, L0, 120, BOT, B_LO)
+    ax.add_patch(Rectangle((380 - 145, -25.5), 145 - 22.5, 5, fc="#000", ec="#555", lw=0.4))   # through the south lip
+    honeycomb(ax, L0, 120, B_HI, TOP); honeycomb(ax, L0, 120, BOT, B_FACE)
     for i, col in enumerate(ACCENT):                                      # 4 inserts, 2.5 x 14 each
         ax.add_patch(Rectangle((338 + i * 4, C + BAND / 2 + 39.5 / 2 - 7), 2.5, 14, fc=col, lw=0))
     ax.text(312, -40, "drive behind the lip (dashed)", ha="center", fontsize=6.5)
-    ax.text(296, -32, "disc slot in the stripe (black filler), 122.5 x 5", ha="center", fontsize=6.5)
-    ax.text(250, 40, "north lip 39.5", fontsize=7); ax.text(150, 0, "black stripe ~48, constant", color="w", fontsize=7)
-    ax.text(150, -40, "south lip ~32", fontsize=7)
+    ax.text(296, -32, "disc slot through the lip, 122.5 x 5", ha="center", fontsize=6.5)
+    ax.text(250, 40, "north lip 39.5", fontsize=7); ax.text(150, 0, "black stripe 40 (core face only)", color="w", fontsize=7)
+    ax.text(150, -40, "south lip 39.5", fontsize=7)
     ax.text(345, 66, "colour inserts", fontsize=6.5, ha="center")
 
 

@@ -1,17 +1,20 @@
-# Handoff: where the last session stopped (2026-11-02)
+# Handoff: where the last session stopped (2026-11-10)
 
-Read `CLAUDE.md` first, then this. Delete this file once the redesign below is settled and its decisions are in `CLAUDE.md`.
+Read `CLAUDE.md` first, then `CHANGELOG.md`, then this. Sections below "State before that" are history: the
+wrap-around design settled their questions (ends, level edges, disc access). Keep them for the reasoning only.
 
-## Latest (2026-11-10): brainstorming the clip mounting
-Process: `superpowers:brainstorming`, one question at a time; nothing gets built until Mike approves the written design.
-- **Done and built:** notchless stripe (x −25.5…22.2) and a black disc-slot filler, see `CLAUDE.md` Drive + Wrap rows.
+## Latest (2026-11-10): clip strips built, fit tests ready
+- **Built:** the south face lip covers the core to x −17.8 (40 mm face stripe, slot through the lip, hidden guide, square
+  corners). It replaces the black filler. Slide-in clip strips (proposal below, approved by Mike) are in `cad/wrap.py`,
+  and `cad/check_clip_strips.py` passes for all 9 strips.
+- **Ready to print first:** `deliverables/fit_tests/` (two coupons + strip-in-offcut), order in `TODO.md`.
 - **Decided, not built:** sleeve (plates overhang both ends by the slide distance), see `CLAUDE.md` Removal / sleeve row. Needs Job 1C.
-- **Waiting on Mike:** his review of the clip-strip proposal below, using the exploded sketch
-  `docs/mockups/explode/` (PNGs; `explode_spike.py` rebuilds it, throwaway). Question put to him: what's wrong or missing?
-- **Next after that:** write the design doc (`docs/superpowers/specs/2026-11-10-mounting-sleeve-design.md`): sleeve, channels,
-  latches, rebuilt hooks, re-check of the tile split and seam. A reviewer reads it before Mike.
+- **Open from the proposal:** hooks rebuilt as parametric solids (item 4), fewer longer strips, the latch's flex arm,
+  a chamfer under the strip's dovetail shoulder (it needs supports now). One end stop sits ~2 mm from the z 164 seam (target ≥3).
+  The floor grille still skips holes by the old shelf bboxes (`SHELVES`), not the rails.
+- **Next:** stepped seam, sleeve, port cut-outs, then the printable set.
 
-### Clip strips: proposal shown to Mike
+### Clip strips: proposal shown to Mike (approved 2026-11-10; items 1–3 and 6 built)
 1. Dovetail channel on the plate's inner floor (part of the tile).
 2. Solid end stop on the side that takes the pull when the plate slides off, so removal load goes into plastic, not the latch.
 3. Thumb latch at the open end: a flex tab snaps over a ledge; press it and slide the strip out, no tools.
@@ -58,7 +61,7 @@ Still mid-design on the plate edges, west/east ends and disc access. **Nothing i
 These `CLAUDE.md` decisions change if this goes ahead: "Edges" (slanted reveal, core-following skirts) and "Drive" (notch).
 
 ## Rejected but still in the code
-The semi-open walls are still in `cad/slab.py` (`END_FLAT`, `END_DISC`, `end_wall_cut`, the wall zone in `plate()`), with `analysis/end_edges.py`, `cad/check_end_walls.py` and `cad/renders/ends_*.png`. Mike rejected the concept. Remove them when the new design is built. The model builds as it stands, so nothing is broken in the meantime.
+The semi-open walls are still in `cad/slab.py` (`END_FLAT`, `END_DISC`, `end_wall_cut`, the wall zone in `plate()`), which `wrap.py` imports for its constants. Their scripts and renders moved to `archive/` (2026-11-10).
 
 ## How to resume
 1. The process in use is the `superpowers:brainstorming` skill. Mike accepted its browser mockups. The questions continue one at a time, and a written description needs his approval before any build.
@@ -66,7 +69,7 @@ The semi-open walls are still in `cad/slab.py` (`END_FLAT`, `END_DISC`, `end_wal
 3. Use cadgen as `cadgen +0.8.4`, the installed version.
 
 ## Side items
-- Job 1B: the 2026-11-09 research makes 114 the working spacing; only a fan-end confirmation is left. Rear ports (X-ray, Job 1D): notches were drafted and then dropped (2026-11-10). The stripe's disc-side edge moved to −25.5 instead, so plugs clear it and the disc slot sits inside the stripe in a black filler; one HDMI reading checks the clearance. Job 1C is on hold. **Next topic: clip mounting** (slide-in strips: how they hold the console's original slots and how they mount in the plate).
+- Job 1B: the 2026-11-09 research makes 114 the working spacing; only a fan-end confirmation is left. Rear ports (X-ray, Job 1D): notches were drafted and then dropped (2026-11-10). The stripe's disc-side edge moved to −25.5 instead, so plugs clear it; one HDMI reading checks the clearance. (The face side changed again the same day, see Latest.) Job 1C is on hold.
 - That model's creator and licence are still unconfirmed, because Cloudflare blocked curl and Mike saved the files rather than the page.
 
 ## Video reference: devynPC "BoxPlates" (reviewed 2026-11-02)
@@ -116,7 +119,7 @@ Mike: the back edges must not obstruct the exhaust, so use bigger openings or a 
 **Update:** Mike chose the honeycomb for every vent, fan grilles included (2026-11-02). The 2D mockup `wrap_views.png` is final at this stage, and the next step is a 3D draft.
 
 ## 3D draft (2026-11-02)
-`cad/wrap.py` → `wrap_horizontal` (386 × 261 × 131 mm, 29 parts, ~50 s cold build). Its parts: floor trays with a honeycomb grille, separate face, back and end lip strips (honeycomb vents, the disc slot in the south face lip, colour inserts on the north face lip), TPU feet, the core and drive proxies, and the old shelves relabelled `clip_placeholder_*`. Not drawn: stepped seam, clip channels, port cut-outs, disc guide tunnel.
+`cad/wrap.py` → `wrap_horizontal` (386 × 261 × 131 mm, 29 parts, ~50 s cold build). Its parts: floor trays with a honeycomb grille, separate face, back and end lip strips (honeycomb vents, the disc slot in the south face lip, colour inserts on the north face lip), TPU feet, the core and drive proxies, and the old shelves relabelled `clip_placeholder_*` (since 2026-11-10: real clip strips and a disc guide). Not drawn: stepped seam, port cut-outs.
 **Open question for Mike, orientation:** the model comes from the real-plate scans, and the disc slot confirms +Y is the front. Seen from the front with the console lying disc-side down, it puts the **drive end on the left**. Mike described the drive at the bottom **right**, and `wrap_views.png` follows his description. **Resolved (Mike): trust the model.** From the front, the drive end (E) is on the left and the fan end (W) on the right. `wrap_views.png` is flipped to match. `Superpowers Brainstorming.html` is deleted (deprecated). In the viewer, 0.4 mm engravings show only in **solid** display mode (edges); shaded hides them.
 
 ## North top treatment (2026-11-02, built in `wrap.py`)
